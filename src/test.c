@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 
     printf("OUI\n");
     Letter l;
-    initLetter(&l, 'a');
+    initLetter(&l, 'q');
     printf("%d", calculScoreLetter(&l));
 
 
