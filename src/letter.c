@@ -108,8 +108,8 @@ void initLetter(Letter* letter, char c){
         letter->character = c;
         break;
     default:
-        letter->weight = 1;
-        letter->character = 'a';
+        letter->weight = 0;
+        letter->character = ' ';
         break;
     }
 
