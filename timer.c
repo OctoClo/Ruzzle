@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "timer.h"
 
 int main(int argc, char** argv)
@@ -12,15 +13,12 @@ int main(int argc, char** argv)
     int tempsPrecedent = 0, tempsActuel = 0;
 
 
-    while(tempsActuel<=1000)
+    while(tempsActuel<=60000)
     {
-        if(tempsActuel-tempsPrecedent==1000){
-            printf("1 sec écoulée");
-        }
-        printf("temps: %d\n",tempsActuel);
+        printf("temps: %d sec\n",tempsActuel/1000);
+        Sleep(1000);
         tempsActuel = SDL_GetTicks();
     }
-
 
 
 }
