@@ -1,11 +1,16 @@
 #include "GameManager.h"
 
-void initGameManager(struct GameManager* gameManager)
+void initGameManager(GameManager* gameManager)
 {
     // Declare which function to call on program exit
     atexit(cleanExit);
 
-    /* Initialize all libraries; print eventual errors */
+    // Initialize struct values
+    gameManager->window = malloc(sizeof gameManager->window);
+    gameManager->renderer = malloc(sizeof gameManager->renderer);
+    gameManager->step = GAME;
+
+    // Initialize all libraries; print eventual errors
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
         fatalError(gameManager, "Error during SDL initialization", "SDL");
 
@@ -20,7 +25,7 @@ void initGameManager(struct GameManager* gameManager)
 	/*if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
         fatalError("Warning : Linear texture filtering not enabled !", "SDL");*/
 
-    /* Create game window and renderer */
+    // Create game window and renderer
     gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_OPENGL);
 	if (!gameManager->window)
 		fatalError(gameManager, "Error during window creation", "SDL");
@@ -30,7 +35,7 @@ void initGameManager(struct GameManager* gameManager)
         fatalError(gameManager, "Error during render creation", "SDL");
 }
 
-void gameLoop(struct GameManager* gameManager)
+void gameLoop(GameManager* gameManager)
 {
     SDL_Event event;
 
@@ -44,24 +49,24 @@ void gameLoop(struct GameManager* gameManager)
     }
 }
 
-void cleanExitGameManager(struct GameManager* gameManager)
+void freeGameManager(GameManager* gameManager)
 {
-    /* Destroy renderer and window if created */
+    // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
     {
         SDL_DestroyRenderer(gameManager->renderer);
-        gameManager->renderer = NULL;
+        free(gameManager->renderer);
     }
     if (gameManager->window != NULL)
     {
         SDL_DestroyWindow(gameManager->window);
-        gameManager->window = NULL;
+        free(gameManager->window);
     }
 }
 
 void cleanExit()
 {
-    /* Quit every library that has been initialized */
+    // Quit every library that has been initialized
     IMG_Quit();
     if (TTF_WasInit())
         TTF_Quit();
@@ -69,19 +74,19 @@ void cleanExit()
         SDL_Quit();
 }
 
-void handleEvents(struct GameManager* gameManager, SDL_Event* e)
+void handleEvents(GameManager* gameManager, SDL_Event* e)
 {
     // Handle quit event
     if (e->type == SDL_QUIT)
         gameManager->step = QUIT;
 }
 
-void update(struct GameManager* gameManager)
+void update(GameManager* gameManager)
 {
     // Update things
 }
 
-void render(struct GameManager* gameManager)
+void render(GameManager* gameManager)
 {
     // Clear screen with black color
     SDL_SetRenderDrawColor(gameManager->renderer, 0x00, 0x00, 0x00, 0x00);
@@ -92,7 +97,7 @@ void render(struct GameManager* gameManager)
     SDL_RenderPresent(gameManager->renderer);
 }
 
-void fatalError(struct GameManager* gameManager, const char* error, const char* library)
+void fatalError(GameManager* gameManager, const char* error, const char* library)
 {
     // Print error
     printf("Error : ");
@@ -105,6 +110,6 @@ void fatalError(struct GameManager* gameManager, const char* error, const char* 
     else if (strcmp(library, "IMG") == 0)
         printf("%s\n", TTF_GetError());
 
-    cleanExitGameManager(gameManager);
+    freeGameManager(gameManager);
     exit(EXIT_FAILURE);
 }

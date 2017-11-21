@@ -10,24 +10,28 @@
 #include <stdlib.h>
 #include "string.h"
 
+#include "Texture.h"
+
+typedef enum Step Step;
 enum Step { GAME, QUIT };
 
+typedef struct GameManager GameManager;
 struct GameManager
 {
-    enum Step step;
+    Step step;
     SDL_Window* window;
     SDL_Renderer* renderer;
 };
 
-void initGameManager(struct GameManager*);
-void gameLoop(struct GameManager*);
-void cleanExitGameManager(struct GameManager*);
+void initGameManager(GameManager*);
+void gameLoop(GameManager*);
+void freeGameManager(GameManager*);
 void cleanExit();
 
-void handleEvents(struct GameManager*, SDL_Event*);
-void update(struct GameManager*);
-void render(struct GameManager*);
+void handleEvents(GameManager*, SDL_Event*);
+void update(GameManager*);
+void render(GameManager*);
 
-void fatalError(struct GameManager*, const char*, const char*);
+void fatalError(GameManager*, const char*, const char*);
 
 #endif // GAME_MANAGER_H

@@ -7,11 +7,13 @@
 
 int main(int argc, char** argv)
 {
-    struct GameManager gameManager = { GAME, NULL, NULL };
+    GameManager* gameManager = malloc(sizeof(GameManager));
 
-    initGameManager(&gameManager);
-    gameLoop(&gameManager);
+    initGameManager(gameManager);
+    gameLoop(gameManager);
 
-    cleanExitGameManager(&gameManager);
+    freeGameManager(gameManager);
+    free(gameManager);
+
     return EXIT_SUCCESS;
 }
