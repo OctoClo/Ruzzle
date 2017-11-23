@@ -1,18 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "word.h"
-#include "linkedList.h"
+#include "LinkedLetter.h"
 
 
-void initWord(Word* w){
+/*Word* initWord(){
+    Word* w = malloc(sizeof(Word));
     w->head = NULL;
-    initLetter(&w->head->letter, ' ');
+    initLetter(' ');
+    return w;
 
 }
 
 void addLetter(Word* w, Letter l){
     LetterList* current = w->head;
-    if(current->letter.character == NULL){
+    if(current->letter.character == ' '){
         current->letter = l;
     }else{
         while(current->nextLetter != NULL){
@@ -37,4 +39,4 @@ void displayWord(Word* w){
         printf("Rien a afficher, mot vide");
     }
 
-}
+}*/

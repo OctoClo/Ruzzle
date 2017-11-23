@@ -13,7 +13,7 @@ typedef struct Letter{
 
 }Letter;
 
-void initLetter(Letter* letter, char c);
+Letter* initLetter(char c);
 
 int calculScoreLetter(Letter* l);
 

@@ -1,17 +1,16 @@
 #ifndef WORD_H_INCLUDED
 #define WORD_H_INCLUDED
-#include "linkedList.h"
+#include "LinkedLetter.h"
 
-typedef struct Word{
+/*typedef struct Word{
     LetterList* head;
-
 }Word;
 
-void initWord(Word* w);
+Word* initWord(void);
 
 void addLetter(Word* w, Letter l);
 
-void displayWord(Word* w);
+void displayWord(Word* w);*/
 
 
 

@@ -1,8 +1,13 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "letter.h"
 
 
-void initLetter(Letter* letter, char c){
+Letter* initLetter(char c){
+    Letter *letter = malloc(sizeof(Letter));
+    letter->modif = NONE;
+    letter->row = 0;
+    letter->column = 0;
     switch (c){
     case 'a':
         letter->weight = 1;
@@ -112,6 +117,8 @@ void initLetter(Letter* letter, char c){
         letter->character = ' ';
         break;
     }
+
+    return letter;
 
 
 }

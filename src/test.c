@@ -1,38 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "letter.h"
-#include "word.h"
-#include "linkedList.h"
+#include "LinkedLetter.h"
 
 
 int main(int argc, char** argv)
 {
 
 
-    Letter l;
-    initLetter(&l, 'q');
-    printf("%c = %d pts\n", l.character, calculScoreLetter(&l));
-    Word w;
-    Word* wPtr = &w;
-    initWord(wPtr);
-    //Letter test = wPtr->head->letter;
-//    test = l;
-    //printf("%c", test.character);
-    /*if(wPtr->head->letter==NULL){
-        printf("letter head est NULL");
-    }else{
-        printf("letter head not NULL");
-    }*/
-        //addLetter(wPtr, &l);
-    /*wPtr->head = NULL;
-    wPtr->head = malloc(sizeof(LetterList));
-    if(wPtr->head == NULL){
-        return 1;
-    }
+    Liste *liste = listeInitialisation();
+    listeInsertionBeginning(liste, 't');
+    listeInsertionBeginning(liste, 'u');
+    listeInsertionBeginning(liste, 'l');
+    listeInsertionBeginning(liste, 'a');
+    listeInsertionBeginning(liste, 's');
+    displayListe(liste);
 
-    wPtr->head->letter = &l;
-    wPtr->head->nextLetter = NULL;*/
-    //displayWord(wPtr);
+    printf("\n");
+
+    Liste *liste2 = listeInitialisation();
+    listeInsertionEnd(liste2, 's');
+    listeInsertionEnd(liste2, 'a');
+    listeInsertionEnd(liste2, 'l');
+    listeInsertionEnd(liste2, 'u');
+    listeInsertionEnd(liste2, 't');
+    displayListe(liste2);
 
 
 
