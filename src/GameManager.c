@@ -8,6 +8,7 @@ void initGameManager(GameManager* gameManager)
     // Initialize struct values
     gameManager->window = malloc(sizeof gameManager->window);
     gameManager->renderer = malloc(sizeof gameManager->renderer);
+    gameManager->letter = malloc(sizeof gameManager->letter);
     gameManager->step = GAME;
 
     // Initialize all libraries; print eventual errors
@@ -33,6 +34,9 @@ void initGameManager(GameManager* gameManager)
     gameManager->renderer = SDL_CreateRenderer(gameManager->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!gameManager->renderer)
         fatalError(gameManager, "Error during render creation", "SDL");
+
+    if (createImageTexture(gameManager->letter, "./resources/assets/letters/letter_a.png", gameManager->renderer) == SDL_FALSE)
+        fatalError(gameManager, "Error during texture creation", "IMG");
 }
 
 void gameLoop(GameManager* gameManager)
@@ -51,6 +55,8 @@ void gameLoop(GameManager* gameManager)
 
 void freeGameManager(GameManager* gameManager)
 {
+    freeTexture(gameManager->letter);
+
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
     {
@@ -93,6 +99,7 @@ void render(GameManager* gameManager)
     SDL_RenderClear(gameManager->renderer);
 
     // Render things
+    renderTexture(gameManager->letter, 50, 50, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
 }
