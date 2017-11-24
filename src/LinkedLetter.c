@@ -50,17 +50,18 @@ void listeInsertionEnd(Liste *liste, char c){
 
     LinkedLetter *current = liste->first;
 
-    if(current->lett->character == ' '){
-        current = newLink;
-    }else{
-        while(current->next != NULL){
-            current = current->next;
-        }
-        current->next = newLink;
+    if(liste->first->lett->character == ' '){
+        liste->first = newLink;
+        return;
     }
 
-    liste->first = current;
+    while(current->next != NULL){
+        current = current->next;
+    }
 
+    current->next = newLink;
+
+    return;
 
 
 
