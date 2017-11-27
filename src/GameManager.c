@@ -90,6 +90,8 @@ void handleEvents(GameManager* gameManager, SDL_Event* e)
     // Handle quit event
     if (e->type == SDL_QUIT)
         gameManager->step = QUIT;
+    else if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
+        gameManager->step = QUIT;
 }
 
 void update(GameManager* gameManager)
