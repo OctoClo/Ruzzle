@@ -22,6 +22,7 @@ struct GameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     Texture* letter;
+    Texture* bonus;
 };
 
 void initGameManager(GameManager*);
