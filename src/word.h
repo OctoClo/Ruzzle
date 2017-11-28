@@ -2,15 +2,28 @@
 #define WORD_H_INCLUDED
 #include "LinkedLetter.h"
 
-/*typedef struct Word{
-    LetterList* head;
+typedef struct Word{
+    Liste* word;
 }Word;
+
 
 Word* initWord(void);
 
-void addLetter(Word* w, Letter l);
+Word* initWordNotEmpty(char*);
 
-void displayWord(Word* w);*/
+void addLetterInWord(Word*, Letter*);
+
+void displayWord(Word*);
+
+char* getWord(Word*);
+
+int scoreWord(Word*);
+
+int sizeWord(Word*);
+
+Letter* getLetter(Word*, int);
+
+
 
 
 

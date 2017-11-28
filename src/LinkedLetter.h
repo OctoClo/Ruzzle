@@ -15,13 +15,17 @@ typedef struct Liste{
 
 Liste *listeInitialisation();
 
-void listeInsertionBeginning(Liste *liste, char c);
+void listeInsertionBeginning(Liste*, char);
 
-void listeInsertionEnd(Liste *liste, char c);
+void listeInsertionEnd(Liste*, char);
 
-void deleteFirstOfListe(Liste *liste);
+void deleteFirstOfListe(Liste*);
 
-void displayListe(Liste *liste);
+void displayListe(Liste*);
+
+int sizeListe(Liste*);
+
+Letter* getLetterAtRank(Liste*, int);
 
 
 #endif // LINKEDLETTER_H_INCLUDED
