@@ -8,6 +8,8 @@ void initGameManager(GameManager* gameManager)
     // Initialize struct values
     gameManager->window = malloc(sizeof gameManager->window);
     gameManager->renderer = malloc(sizeof gameManager->renderer);
+    gameManager->letter = malloc(sizeof gameManager->letter);
+    gameManager->bonus = malloc(sizeof gameManager->bonus);
     gameManager->step = GAME;
 
     // Initialize all libraries; print eventual errors
@@ -33,6 +35,12 @@ void initGameManager(GameManager* gameManager)
     gameManager->renderer = SDL_CreateRenderer(gameManager->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!gameManager->renderer)
         fatalError(gameManager, "Error during render creation", "SDL");
+
+    if (createImageTexture(gameManager->letter, "./resources/assets/letters/letter_a.png", gameManager->renderer) == SDL_FALSE)
+        fatalError(gameManager, "Error during letter's texture creation", "IMG");
+
+        if (createImageTexture(gameManager->bonus, "./resources/assets/bonuses/bonus_tw.png", gameManager->renderer) == SDL_FALSE)
+        fatalError(gameManager, "Error during bonus' texture creation", "IMG");
 }
 
 void gameLoop(GameManager* gameManager)
@@ -51,6 +59,9 @@ void gameLoop(GameManager* gameManager)
 
 void freeGameManager(GameManager* gameManager)
 {
+    freeTexture(gameManager->bonus);
+    freeTexture(gameManager->letter);
+
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
     {
@@ -79,6 +90,8 @@ void handleEvents(GameManager* gameManager, SDL_Event* e)
     // Handle quit event
     if (e->type == SDL_QUIT)
         gameManager->step = QUIT;
+    else if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
+        gameManager->step = QUIT;
 }
 
 void update(GameManager* gameManager)
@@ -93,6 +106,8 @@ void render(GameManager* gameManager)
     SDL_RenderClear(gameManager->renderer);
 
     // Render things
+    renderTexture(gameManager->letter, 50, 50, gameManager->renderer);
+    renderTexture(gameManager->bonus, 48, 48, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
 }
