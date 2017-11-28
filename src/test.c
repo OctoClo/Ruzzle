@@ -8,6 +8,9 @@ int main(int argc, char** argv)
 {
 
 
+
+
+
     Liste *liste = listeInitialisation();
     listeInsertionBeginning(liste, 't');
     listeInsertionBeginning(liste, 'u');

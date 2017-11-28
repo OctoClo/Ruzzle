@@ -13,9 +13,9 @@ typedef struct Letter{
 
 }Letter;
 
-Letter* initLetter(char c);
+Letter* initLetter(char);
 
-int calculScoreLetter(Letter* l);
+int scoreLetter(Letter*);
 
 
 

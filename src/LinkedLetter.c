@@ -92,6 +92,4 @@ void displayListe(Liste *liste){
         printf("%c", current->lett->character);
         current = current->next;
     }
-
-    printf(" | Fin du mot");
 }
