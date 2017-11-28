@@ -93,3 +93,33 @@ void displayListe(Liste *liste){
         current = current->next;
     }
 }
+
+int sizeListe(Liste *liste){
+    if(liste == NULL){
+        exit(EXIT_FAILURE);
+    }
+    int count = 0;
+
+    LinkedLetter *current = liste->first;
+
+    while(current != NULL){
+        count++;
+        current = current->next;
+    }
+
+    return count;
+}
+
+Letter* getLetterAtRank(Liste *liste, int rank){
+    if(liste == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    LinkedLetter *current = liste->first;
+
+    for(int i=1; i<rank; i++){
+        current = current->next;
+    }
+
+    return current->lett;
+}
