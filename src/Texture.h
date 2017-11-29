@@ -7,13 +7,12 @@
 
 #include <stdlib.h>
 
-typedef struct Texture Texture;
-struct Texture
+typedef struct
 {
     SDL_Texture* texture;
     int width;
     int height;
-};
+} Texture;
 
 SDL_bool createImageTexture(Texture*, char*, SDL_Renderer*);
 SDL_bool createTextTexture(Texture*, char*, SDL_Color*, TTF_Font*, SDL_Renderer*);

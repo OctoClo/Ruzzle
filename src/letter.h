@@ -1,22 +1,33 @@
 #ifndef LETTER_H_INCLUDED
 #define LETTER_H_INCLUDED
 
-typedef enum Modifier{
-    DOUBLE_LETTER, TRIPLE_LETTER, DOUBLE_WORD, TRIPLE_WORD, NONE
-}Modifier;
+#include <SDL2/SDL.h>
 
-typedef struct Letter{
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "Texture.h"
+#include "GameManager.h"
+#include "Enums.h"
+
+typedef struct
+{
+    char character;
     int weight;
     Modifier modif;
-    int row, column;
-    char character;
+    Texture* tile;
+    Texture* bonus;
+    int x, y;
+} Letter;
 
-}Letter;
-
-Letter* initLetter(char);
+Letter* createLetter(GameManager*, char, int, int);
+Letter* createLetterModif(GameManager*, char, int, int, Modifier);
 
 int scoreLetter(Letter*);
+void renderLetter(Letter*, SDL_Renderer*);
 
+void freeLetter(Letter*);
 
 
 #endif // LETTER_H_INCLUDED

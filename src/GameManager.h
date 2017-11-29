@@ -11,21 +11,19 @@
 #include "string.h"
 
 #include "Texture.h"
+#include "Enums.h"
 
-typedef enum Step Step;
-enum Step { GAME, QUIT };
+struct Grid;
 
-typedef struct GameManager GameManager;
-struct GameManager
+typedef struct
 {
     Step step;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    Texture* letter;
-    Texture* bonus;
-};
+    struct Grid* grid;
+} GameManager;
 
-void initGameManager(GameManager*);
+GameManager* createGameManager();
 void gameLoop(GameManager*);
 void freeGameManager(GameManager*);
 void cleanExit();
