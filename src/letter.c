@@ -11,6 +11,7 @@ Letter* createLetterModif(GameManager* gameManager, char c, int x, int y, Modifi
     letter->modif = modif;
     letter->x = x;
     letter->y = y;
+    letter->selected = 0;
 
     switch (c)
     {
@@ -49,6 +50,16 @@ Letter* createLetterModif(GameManager* gameManager, char c, int x, int y, Modifi
 
     if (createImageTexture(letter->tile, tilePath, gameManager->renderer) == SDL_FALSE)
         fatalError(gameManager, "Error during letter's texture creation", "IMG");
+
+    letter->selectedTile = malloc(sizeof letter->selectedTile);
+    char selectedTilePath[50] = "./resources/assets/letters/s_letter_";
+    int selectedTileLength = strlen("./resources/assets/letters/s_letter_");
+    selectedTilePath[selectedTileLength] = letter->character;
+    selectedTilePath[selectedTileLength + 1] = '\0';
+    strcat(selectedTilePath, extension);
+
+    if (createImageTexture(letter->selectedTile, selectedTilePath, gameManager->renderer) == SDL_FALSE)
+        fatalError(gameManager, "Error during letter's selected texture creation", "IMG");
 
     if (letter->modif != NONE)
     {
@@ -111,9 +122,14 @@ int scoreLetter(Letter* l)
 
 void renderLetter(Letter* letter, SDL_Renderer* renderer)
 {
-    renderTexture(letter->tile, letter->x, letter->y, renderer);
-    if (letter->modif != NONE)
-        renderTexture(letter->bonus, letter->x - 4, letter->y - 4, renderer);
+    if (letter->selected == 0)
+    {
+        renderTexture(letter->tile, letter->x, letter->y, renderer);
+        if (letter->modif != NONE)
+            renderTexture(letter->bonus, letter->x - 4, letter->y - 4, renderer);
+    }
+    else
+        renderTexture(letter->selectedTile, letter->x, letter->y, renderer);
 }
 
 void freeLetter(Letter* letter)

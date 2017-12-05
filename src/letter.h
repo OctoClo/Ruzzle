@@ -18,6 +18,8 @@ typedef struct
     Modifier modif;
     Texture* tile;
     Texture* bonus;
+    int selected;
+    Texture* selectedTile;
     int x, y;
 } Letter;
 
