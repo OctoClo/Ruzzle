@@ -1,15 +1,15 @@
 #include "GameManager.h"
 
-void initGameManager(GameManager* gameManager)
+GameManager* createGameManager()
 {
     // Declare which function to call on program exit
     atexit(cleanExit);
 
+    GameManager* gameManager = malloc(sizeof(GameManager));
+
     // Initialize struct values
     gameManager->window = malloc(sizeof gameManager->window);
     gameManager->renderer = malloc(sizeof gameManager->renderer);
-    gameManager->letter = malloc(sizeof gameManager->letter);
-    gameManager->bonus = malloc(sizeof gameManager->bonus);
     gameManager->step = GAME;
 
     // Initialize all libraries; print eventual errors
@@ -28,7 +28,7 @@ void initGameManager(GameManager* gameManager)
         fatalError("Warning : Linear texture filtering not enabled !", "SDL");*/
 
     // Create game window and renderer
-    gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_OPENGL);
+    gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 700, SDL_WINDOW_OPENGL);
 	if (!gameManager->window)
 		fatalError(gameManager, "Error during window creation", "SDL");
 
@@ -36,11 +36,9 @@ void initGameManager(GameManager* gameManager)
     if (!gameManager->renderer)
         fatalError(gameManager, "Error during render creation", "SDL");
 
-    if (createImageTexture(gameManager->letter, "./resources/assets/letters/letter_a.png", gameManager->renderer) == SDL_FALSE)
-        fatalError(gameManager, "Error during letter's texture creation", "IMG");
+    gameManager->grid = createGrid(gameManager);
 
-        if (createImageTexture(gameManager->bonus, "./resources/assets/bonuses/bonus_tw.png", gameManager->renderer) == SDL_FALSE)
-        fatalError(gameManager, "Error during bonus' texture creation", "IMG");
+    return gameManager;
 }
 
 void gameLoop(GameManager* gameManager)
@@ -59,9 +57,8 @@ void gameLoop(GameManager* gameManager)
 
 void freeGameManager(GameManager* gameManager)
 {
-    freeTexture(gameManager->bonus);
-    freeTexture(gameManager->letter);
-
+    freeGrid(gameManager->grid);
+    free(gameManager->grid);
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
     {
@@ -102,12 +99,11 @@ void update(GameManager* gameManager)
 void render(GameManager* gameManager)
 {
     // Clear screen with black color
-    SDL_SetRenderDrawColor(gameManager->renderer, 0x00, 0x00, 0x00, 0x00);
+    SDL_SetRenderDrawColor(gameManager->renderer, 0x22, 0x9E, 0x8F, 0x00);
     SDL_RenderClear(gameManager->renderer);
 
     // Render things
-    renderTexture(gameManager->letter, 50, 50, gameManager->renderer);
-    renderTexture(gameManager->bonus, 48, 48, gameManager->renderer);
+    renderGrid(gameManager->grid, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
 }

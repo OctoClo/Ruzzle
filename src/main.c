@@ -1,5 +1,3 @@
-#include <SDL2/SDL.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,9 +5,7 @@
 
 int main(int argc, char** argv)
 {
-    GameManager* gameManager = malloc(sizeof(GameManager));
-
-    initGameManager(gameManager);
+    GameManager* gameManager = createGameManager();
     gameLoop(gameManager);
 
     freeGameManager(gameManager);
