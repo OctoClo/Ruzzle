@@ -9,7 +9,7 @@ typedef struct Word{
 
 Word* initWord(void);
 
-Word* initWordNotEmpty(char*);
+//Word* initWordNotEmpty(char*);
 
 void addLetterInWord(Word*, Letter*);
 

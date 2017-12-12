@@ -11,7 +11,7 @@ Liste *listeInitialisation(){
         exit(EXIT_FAILURE);
     }
 
-    linkedLetter->lett = initLetter(' ');
+    linkedLetter->lett = NULL;
     linkedLetter->next = NULL;
     liste->first = linkedLetter;
 
@@ -19,14 +19,14 @@ Liste *listeInitialisation(){
 
 }
 
-void listeInsertionBeginning(Liste *liste, char c){
+void listeInsertionBeginning(Liste *liste, Letter* l){
     LinkedLetter *newLink = malloc(sizeof(*newLink));
 
     if(liste == NULL || newLink == NULL){
         exit(EXIT_FAILURE);
     }
 
-    newLink->lett = initLetter(c);
+    newLink->lett = l;
 
     if(liste->first->lett->character == ' '){
         newLink->next = NULL;
@@ -37,14 +37,14 @@ void listeInsertionBeginning(Liste *liste, char c){
 
 }
 
-void listeInsertionEnd(Liste *liste, char c){
+void listeInsertionEnd(Liste *liste, Letter* l){
     LinkedLetter *newLink = malloc(sizeof(*newLink));
 
     if(liste == NULL || newLink == NULL){
         exit(EXIT_FAILURE);
     }
 
-    newLink->lett = initLetter(c);
+    newLink->lett = l;
     newLink->next = NULL;
 
 
