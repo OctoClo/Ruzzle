@@ -11,13 +11,13 @@ Word* initWord(void){
 
 }
 
-Word* initWordNotEmpty(char* theWord){
+/*Word* initWordNotEmpty(GameManager* gameManager, char* theWord){
     Word* w = initWord();
     for(int i=0;i<strlen(theWord); i++){
-        addLetterInWord(w, initLetter(theWord[i]));
+        addLetterInWord(w, createLetter(gameManager, theWord[i]));
     }
     return w;
-}
+}*/
 
 void addLetterInWord(Word* w, Letter* l){
     listeInsertionEnd(w->word, l->character);

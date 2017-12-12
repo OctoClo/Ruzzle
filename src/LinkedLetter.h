@@ -15,9 +15,9 @@ typedef struct Liste{
 
 Liste *listeInitialisation();
 
-void listeInsertionBeginning(Liste*, char);
+void listeInsertionBeginning(Liste*, Letter*);
 
-void listeInsertionEnd(Liste*, char);
+void listeInsertionEnd(Liste*, Letter*);
 
 void deleteFirstOfListe(Liste*);
 
