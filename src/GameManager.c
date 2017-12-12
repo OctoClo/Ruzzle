@@ -1,4 +1,12 @@
 #include "GameManager.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "letter.h"
+#include "word.h"
+#include "LinkedLetter.h"
+#include "Dictionnary.h"
+
+#define TAILLE_MAX 100
 
 GameManager* createGameManager()
 {
@@ -8,8 +16,8 @@ GameManager* createGameManager()
     GameManager* gameManager = malloc(sizeof(GameManager));
 
     // Initialize struct values
-    gameManager->window = malloc(sizeof(gameManager->window));
-    gameManager->renderer = malloc(sizeof(gameManager->renderer));
+    gameManager->window = malloc(sizeof gameManager->window);
+    gameManager->renderer = malloc(sizeof gameManager->renderer);
     gameManager->step = GAME;
 
     // Initialize all libraries; print eventual errors
@@ -24,8 +32,11 @@ GameManager* createGameManager()
 	if ((imageBitmask & imageFlags) != imageFlags)
 		fatalError(gameManager, "Error during SDL_image initialization", "IMG");
 
+	/*if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+        fatalError("Warning : Linear texture filtering not enabled !", "SDL");*/
+
     // Create game window and renderer
-    gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
+    gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 700, SDL_WINDOW_OPENGL);
 	if (!gameManager->window)
 		fatalError(gameManager, "Error during window creation", "SDL");
 
@@ -33,26 +44,40 @@ GameManager* createGameManager()
     if (!gameManager->renderer)
         fatalError(gameManager, "Error during render creation", "SDL");
 
+    gameManager->grid = createGrid(gameManager);
+
+    //TEST FRANK
+
+    // Initialize struct values
+    gameManager->window = malloc(sizeof(gameManager->window));
+    gameManager->renderer = malloc(sizeof(gameManager->renderer));
+    gameManager->step = GAME;
+
+    //Ouverture du fichier dico
+    dico = fopen("src/file/dico.txt", "r");
+
+    //D�claration de l'arbre pr�fix�
+    TrieNode* root = initNode();
+
+
+    // Create game window and renderer
+    gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
+	if (!gameManager->window)
+		fatalError(gameManager, "Error during window creation", "SDL");
+
+        //Enregistrement des mots du dictionnaire dans l'arbre pr�fix�e
+        while(fgets(word, TAILLE_MAX, dico) != NULL){
+            strtok(word, "\n");
+            insertNode(root, word);
+        }
+
     gameManager->timer = createTimer(gameManager);
     gameManager->grid = createGrid(gameManager);
     gameManager->currentWord = initWord();
 
-    return gameManager;
-}
 
-void gameLoop(GameManager* gameManager)
-{
-    SDL_Event event;
-
-    // Game loop : handle every event, update and render game
-    while (gameManager->step != QUIT)
-    {
-        while (SDL_PollEvent(&event))
-            handleEvents(gameManager, &event);
-        update(gameManager);
-        render(gameManager);
+        fclose(dico);
     }
-}
 
 void handleEvents(GameManager* gameManager, SDL_Event* e)
 {
@@ -79,11 +104,6 @@ void update(GameManager* gameManager)
     updateTimer(gameManager->timer, gameManager);
 }
 
-void render(GameManager* gameManager)
-{
-    // Clear screen with black color
-    SDL_SetRenderDrawColor(gameManager->renderer, 0x22, 0x9E, 0x8F, 0x00);
-    SDL_RenderClear(gameManager->renderer);
 
     // Render things
     renderGrid(gameManager->grid, gameManager->renderer);
