@@ -1,4 +1,12 @@
 #include "GameManager.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "letter.h"
+#include "word.h"
+#include "LinkedLetter.h"
+#include "Dictionnary.h"
+
+#define TAILLE_MAX 100
 
 GameManager* createGameManager()
 {
@@ -37,6 +45,54 @@ GameManager* createGameManager()
         fatalError(gameManager, "Error during render creation", "SDL");
 
     gameManager->grid = createGrid(gameManager);
+
+    //TEST FRANK
+
+    /*FILE* dico = NULL;
+    char word[TAILLE_MAX];
+    Word* w = initWord();
+    addLetterInWord(w, createLetter(gameManager, 'j', 0, 0));
+
+    //Ouverture du fichier dico
+    dico = fopen("src/file/dico.txt", "r");
+
+    //Déclaration de l'arbre préfixé
+    TrieNode* root = initNode();
+
+
+    //Traitement du fichier dico
+    if(dico != NULL){
+
+
+        //Enregistrement des mots du dictionnaire dans l'arbre préfixée
+        while(fgets(word, TAILLE_MAX, dico) != NULL){
+            strtok(word, "\n");
+            insertNode(root, word);
+        }
+
+
+
+        fclose(dico);
+    }
+
+    if(checkIfLetterIsPossible(root, w, createLetter(gameManager, 'a', 0, 1))){
+        SDL_Log("Check");
+    }else{
+        SDL_Log("Not check");
+    }
+
+
+    //Vérification de présence du mot (Test)
+    if(searchNode(root, "jambon")){
+        printf("OUIIII");
+
+    }else{
+        printf("NOOON");
+    }
+
+
+    */
+    //FIN TEST FRANK
 
     return gameManager;
 }
