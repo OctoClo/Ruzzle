@@ -23,11 +23,9 @@ struct Letter
     int selected;
     Texture* selectedTile;
     int x, y;
-} Letter;
 };
 
-Letter* createLetter(GameManager*, char, int, int);
-Letter* createLetterModif(GameManager*, char, int, int, Modifier);
+Letter* createLetter(struct GameManager*, char, int, int, Modifier);
 
 int scoreLetter(Letter*);
 void renderLetter(Letter*, SDL_Renderer*);

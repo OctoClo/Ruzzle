@@ -1,11 +1,6 @@
 #include "Letter.h"
 
-Letter* createLetter(GameManager* gameManager, char c, int x, int y)
-{
-    return createLetterModif(gameManager, c, x, y, NONE);
-}
-
-Letter* createLetterModif(GameManager* gameManager, char c, int x, int y, Modifier modif)
+Letter* createLetter(struct GameManager* gameManager, char c, int x, int y, Modifier modif)
 {
     Letter* letter = malloc(sizeof(Letter));
     letter->modif = modif;
