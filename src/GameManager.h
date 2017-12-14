@@ -13,6 +13,7 @@
 #include "Texture.h"
 #include "Enums.h"
 #include "Utils.h"
+#include "Word.h"
 
 struct Grid;
 struct Letter;
@@ -25,6 +26,7 @@ struct GameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     struct Grid* grid;
+    struct Word* currentWord;
 };
 
 GameManager* createGameManager();
@@ -34,6 +36,8 @@ void handleEvents(GameManager*, SDL_Event*);
 void update(GameManager*);
 void render(GameManager*);
 
+void addLetter(GameManager*, struct Letter*);
+void finishWord(GameManager*);
 
 void freeGameManager(GameManager*);
 void cleanExit(void);

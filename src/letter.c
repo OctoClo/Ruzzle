@@ -115,6 +115,11 @@ int scoreLetter(Letter* l)
     return score;
 }
 
+void setSelectedLetter(Letter* letter, int selected)
+{
+    letter->selected = selected;
+}
+
 void renderLetter(Letter* letter, SDL_Renderer* renderer)
 {
     if (letter->selected == 0)

@@ -26,6 +26,32 @@ Grid* createGrid(GameManager* gameManager)
     return grid;
 }
 
+Letter* getLetterCoord(Grid* grid, int x, int y)
+{
+    int newX = x - BEGIN_GRID_X, newY = y - BEGIN_GRID_Y;
+
+    if (newX < 0 || newY < 0 || newX > (GRID_SIZE * GRID_CELL_SIZE) || newY > (GRID_SIZE * GRID_CELL_SIZE))
+        return NULL;
+
+    if (abs((newX % GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2)) <= (LETTER_ASSET_PIXELS / 2) &&
+        abs((newY % GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2)) <= (LETTER_ASSET_PIXELS / 2))
+    {
+        return grid->grid[newX / GRID_CELL_SIZE][newY / GRID_CELL_SIZE];
+    }
+    else
+        return NULL;
+}
+
+void unselectAllLetters(Grid* grid)
+{
+    int row, column;
+    for (row = 0; row < GRID_SIZE; row++)
+    {
+        for (column = 0; column < GRID_SIZE; column++)
+            setSelectedLetter(grid->grid[row][column], 0);
+    }
+}
+
 void renderGrid(Grid* grid, SDL_Renderer* renderer)
 {
     int row, column;

@@ -25,13 +25,13 @@ void listeInsertionBeginning(Liste* liste, Letter* l)
 
     newLink->lett = l;
 
-    if(liste->first->lett->character == ' '){
+    /*if (liste->first->lett->character == ' ')*/
+    if (liste->first->lett == NULL)
         newLink->next = NULL;
-    }else{
+    else
         newLink->next = liste->first;
-    }
-    liste->first = newLink;
 
+    liste->first = newLink;
 }
 
 void listeInsertionEnd(Liste* liste, Letter* l)
@@ -44,10 +44,16 @@ void listeInsertionEnd(Liste* liste, Letter* l)
     newLink->lett = l;
     newLink->next = NULL;
 
+    LinkedLetter* current = liste->first;
 
-    LinkedLetter *current = liste->first;
+    /*if (liste->first->lett->character == ' ')
+    {
+        liste->first = newLink;
+        return;
+    }*/
 
-    if(liste->first->lett->character == ' '){
+    if (liste->first->lett == NULL)
+    {
         liste->first = newLink;
         return;
     }
@@ -78,11 +84,22 @@ void displayListe(Liste* liste)
     if (liste == NULL)
         exit(EXIT_FAILURE);
 
-    LinkedLetter *current = liste->first;
+    LinkedLetter* current = liste->first;
 
-    while(current != NULL){
-        printf("%c", current->lett->character);
-        current = current->next;
+    // Added empty word case (necessary ?)
+    if (current != NULL && current->lett == NULL)
+        SDL_Log("Empty word !");
+    else
+    {
+        while (current != NULL)
+        {
+            // Corrected character display
+            char character[2];
+            character[0] = current->lett->character;
+            character[1] = '\0';
+            SDL_Log(character);
+            current = current->next;
+        }
     }
 }
 

@@ -15,6 +15,9 @@ typedef struct
 } Grid;
 
 Grid* createGrid(GameManager*);
+
+Letter* getLetterCoord(Grid*, int, int);
+void unselectAllLetters(Grid*);
 void renderGrid(Grid*, SDL_Renderer*);
 
 void freeGrid(Grid*);

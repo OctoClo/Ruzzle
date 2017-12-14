@@ -7,9 +7,10 @@ Word* initWord(void)
     return w;
 }
 
-
-void addLetterInWord(Word* w, Letter* l){
-    listeInsertionEnd(w->word, l->character);
+void addLetterInWord(Word* w, struct Letter* l)
+{
+    //listeInsertionEnd(w->word, l->character);
+    listeInsertionEnd(w->word, l);
 }
 
 void displayWord(Word* w)

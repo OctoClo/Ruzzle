@@ -37,6 +37,7 @@ GameManager* createGameManager()
         fatalError(gameManager, "Error during render creation", "SDL");
 
     gameManager->grid = createGrid(gameManager);
+    gameManager->currentWord = initWord();
 
     return gameManager;
 }
@@ -62,6 +63,16 @@ void handleEvents(GameManager* gameManager, SDL_Event* e)
         gameManager->step = QUIT;
     else if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
         gameManager->step = QUIT;
+
+    // Handle mouse inputs
+    else if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
+    {
+        struct Letter* letter = getLetterCoord(gameManager->grid, e->button.x, e->button.y);
+        if (letter != NULL)
+            addLetter(gameManager, letter);
+    }
+    else if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_RIGHT)
+        finishWord(gameManager);
 }
 
 void update(GameManager* gameManager)
@@ -81,6 +92,20 @@ void render(GameManager* gameManager)
     SDL_RenderPresent(gameManager->renderer);
 }
 
+void addLetter(GameManager* gameManager, struct Letter* letter)
+{
+    SDL_Log("Letter added !");
+    addLetterInWord(gameManager->currentWord, letter);
+    setSelectedLetter(letter, 1);
+    displayWord(gameManager->currentWord);
+}
+
+void finishWord(GameManager* gameManager)
+{
+    SDL_Log("Word finished !");
+    gameManager->currentWord = initWord();
+    unselectAllLetters(gameManager->grid);
+}
 
 void cleanExit(void)
 {

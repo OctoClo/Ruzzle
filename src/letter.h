@@ -28,6 +28,7 @@ struct Letter
 Letter* createLetter(struct GameManager*, char, int, int, Modifier);
 
 int scoreLetter(Letter*);
+void setSelectedLetter(Letter*, int);
 void renderLetter(Letter*, SDL_Renderer*);
 
 void freeLetter(Letter*);

@@ -23,9 +23,9 @@ typedef struct Liste
 
 Liste* listeInitialisation();
 
-void listeInsertionBeginning(Liste*, Letter*);
+void listeInsertionBeginning(Liste*, struct Letter*);
 
-void listeInsertionEnd(Liste*, Letter*);
+void listeInsertionEnd(Liste*, struct Letter*);
 
 void deleteFirstOfListe(Liste*);
 
@@ -33,7 +33,7 @@ void displayListe(Liste*);
 
 int sizeListe(Liste*);
 
-Letter* getLetterAtRank(Liste*, int);
+struct Letter* getLetterAtRank(Liste*, int);
 
 
 #endif // LINKEDLETTER_H_INCLUDED
