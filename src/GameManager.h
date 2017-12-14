@@ -12,11 +12,11 @@
 
 #include "Texture.h"
 #include "Enums.h"
+#include "Utils.h"
 
 struct Grid;
 struct Letter;
 
-typedef struct
 typedef struct GameManager GameManager;
 
 struct GameManager
@@ -25,7 +25,7 @@ struct GameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     struct Grid* grid;
-} GameManager;
+};
 
 GameManager* createGameManager();
 void gameLoop(GameManager*);

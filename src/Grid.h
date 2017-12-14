@@ -7,6 +7,7 @@
 #include "GridModel.h"
 #include "Letter.h"
 #include "GameManager.h"
+#include "Utils.h"
 
 typedef struct
 {
