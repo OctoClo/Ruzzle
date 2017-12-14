@@ -11,7 +11,9 @@
 #include "GameManager.h"
 #include "Enums.h"
 
-typedef struct
+typedef struct Letter Letter;
+
+struct Letter
 {
     char character;
     int weight;
@@ -21,12 +23,12 @@ typedef struct
     int selected;
     Texture* selectedTile;
     int x, y;
-} Letter;
+};
 
-Letter* createLetter(GameManager*, char, int, int);
-Letter* createLetterModif(GameManager*, char, int, int, Modifier);
+Letter* createLetter(struct GameManager*, char, int, int, Modifier);
 
 int scoreLetter(Letter*);
+void setSelectedLetter(Letter*, int);
 void renderLetter(Letter*, SDL_Renderer*);
 
 void freeLetter(Letter*);

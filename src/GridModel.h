@@ -1,6 +1,7 @@
 #ifndef GRID_MODEL_H
 #define GRID_MODEL_H
 
+#include "Utils.h"
 #include "Letter.h"
 
 typedef struct
@@ -11,7 +12,7 @@ typedef struct
 
 typedef struct
 {
-    PairGrid grid[4][4];
+    PairGrid grid[GRID_SIZE][GRID_SIZE];
 } GridModel;
 
 GridModel createGridModel();

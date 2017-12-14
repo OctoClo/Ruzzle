@@ -6,32 +6,58 @@ Grid* createGrid(GameManager* gameManager)
 
     GridModel gridModel = createGridModel();
 
-    grid->grid = (Letter***) malloc(4 * sizeof(Letter**));
+    grid->grid = (Letter***) malloc(GRID_SIZE * sizeof(Letter**));
 
     int row, column;
-    for (row = 0; row < 4; row++)
+    for (row = 0; row < GRID_SIZE; row++)
     {
-        grid->grid[row] = (Letter**) malloc(4 * sizeof(Letter*));
-        for (column = 0; column < 4; column++)
+        grid->grid[row] = (Letter**) malloc(GRID_SIZE * sizeof(Letter*));
+        for (column = 0; column < GRID_SIZE; column++)
         {
             grid->grid[row][column] = (Letter*) malloc(sizeof(Letter));
-            grid->grid[row][column] = createLetterModif(gameManager,
-                                                        gridModel.grid[column][row].c,
-                                                        ((row * 100) + 50 + 10),
-                                                        ((column * 100) + 200 + 10),
-                                                        gridModel.grid[column][row].m);
+            grid->grid[row][column] = createLetter( gameManager,
+                                                    gridModel.grid[column][row].c,
+                                                    ((row * GRID_CELL_SIZE) + BEGIN_GRID_X + PIXELS_TO_CENTER_LETTER),
+                                                    ((column * GRID_CELL_SIZE) + BEGIN_GRID_Y + PIXELS_TO_CENTER_LETTER),
+                                                    gridModel.grid[column][row].m);
         }
     }
 
     return grid;
 }
 
+Letter* getLetterCoord(Grid* grid, int x, int y)
+{
+    int newX = x - BEGIN_GRID_X, newY = y - BEGIN_GRID_Y;
+
+    if (newX < 0 || newY < 0 || newX > (GRID_SIZE * GRID_CELL_SIZE) || newY > (GRID_SIZE * GRID_CELL_SIZE))
+        return NULL;
+
+    if (abs((newX % GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2)) <= (LETTER_ASSET_PIXELS / 2) &&
+        abs((newY % GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2)) <= (LETTER_ASSET_PIXELS / 2))
+    {
+        return grid->grid[newX / GRID_CELL_SIZE][newY / GRID_CELL_SIZE];
+    }
+    else
+        return NULL;
+}
+
+void unselectAllLetters(Grid* grid)
+{
+    int row, column;
+    for (row = 0; row < GRID_SIZE; row++)
+    {
+        for (column = 0; column < GRID_SIZE; column++)
+            setSelectedLetter(grid->grid[row][column], 0);
+    }
+}
+
 void renderGrid(Grid* grid, SDL_Renderer* renderer)
 {
     int row, column;
-    for (row = 0; row < 4; row++)
+    for (row = 0; row < GRID_SIZE; row++)
     {
-        for (column = 0; column < 4; column++)
+        for (column = 0; column < GRID_SIZE; column++)
             renderLetter(grid->grid[row][column], renderer);
     }
 }
@@ -39,9 +65,9 @@ void renderGrid(Grid* grid, SDL_Renderer* renderer)
 void freeGrid(Grid* grid)
 {
     int row, column;
-    for (row = 0; row < 4; row++)
+    for (row = 0; row < GRID_SIZE; row++)
     {
-        for (column = 0; column < 4; column++)
+        for (column = 0; column < GRID_SIZE; column++)
         {
             freeLetter(grid->grid[row][column]);
             free(grid->grid[row][column]);
