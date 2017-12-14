@@ -112,15 +112,15 @@ void freeGameManager(GameManager* gameManager)
 void fatalError(GameManager* gameManager, const char* error, const char* library)
 {
     // Print error
-    printf("Error : ");
+    SDL_Log("Fatal error ! ", error);
 
 	// Print details
 	if (strcmp(library, "SDL") == 0)
-        printf("%s\n", SDL_GetError());
+        SDL_Log(SDL_GetError());
     else if (strcmp(library, "TTF") == 0)
-        printf("%s\n", TTF_GetError());
+        SDL_Log(TTF_GetError());
     else if (strcmp(library, "IMG") == 0)
-        printf("%s\n", TTF_GetError());
+        SDL_Log(TTF_GetError());
 
     freeGameManager(gameManager);
     exit(EXIT_FAILURE);
