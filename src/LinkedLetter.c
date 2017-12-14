@@ -25,7 +25,6 @@ void listeInsertionBeginning(Liste* liste, Letter* l)
 
     newLink->lett = l;
 
-    /*if (liste->first->lett->character == ' ')*/
     if (liste->first->lett == NULL)
         newLink->next = NULL;
     else
@@ -45,12 +44,6 @@ void listeInsertionEnd(Liste* liste, Letter* l)
     newLink->next = NULL;
 
     LinkedLetter* current = liste->first;
-
-    /*if (liste->first->lett->character == ' ')
-    {
-        liste->first = newLink;
-        return;
-    }*/
 
     if (liste->first->lett == NULL)
     {

@@ -24,9 +24,6 @@ GameManager* createGameManager()
 	if ((imageBitmask & imageFlags) != imageFlags)
 		fatalError(gameManager, "Error during SDL_image initialization", "IMG");
 
-	/*if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
-        fatalError("Warning : Linear texture filtering not enabled !", "SDL");*/
-
     // Create game window and renderer
     gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
 	if (!gameManager->window)
