@@ -1,19 +1,27 @@
 #ifndef LINKEDLETTER_H_INCLUDED
 #define LINKEDLETTER_H_INCLUDED
-#include "letter.h"
+
+#include <SDL2/SDL.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Letter.h"
 
 typedef struct LinkedLetter LinkedLetter;
 
-struct LinkedLetter{
-    Letter *lett;
-    LinkedLetter *next;
+struct LinkedLetter
+{
+    struct Letter* lett;
+    LinkedLetter* next;
 };
 
-typedef struct Liste{
-    LinkedLetter *first;
-}Liste;
+typedef struct Liste
+{
+    LinkedLetter* first;
+} Liste;
 
-Liste *listeInitialisation();
+Liste* listeInitialisation();
 
 void listeInsertionBeginning(Liste*, Letter*);
 

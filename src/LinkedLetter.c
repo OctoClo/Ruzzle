@@ -1,30 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "LinkedLetter.h"
 
 
-Liste *listeInitialisation(){
-    Liste *liste = malloc(sizeof(*liste));
-    LinkedLetter *linkedLetter = malloc(sizeof(*linkedLetter));
+Liste* listeInitialisation()
+{
+    Liste* liste = malloc(sizeof(*liste));
+    LinkedLetter* linkedLetter = malloc(sizeof(*linkedLetter));
 
-    if(liste == NULL || linkedLetter == NULL){
+    if (liste == NULL || linkedLetter == NULL)
         exit(EXIT_FAILURE);
-    }
 
     linkedLetter->lett = NULL;
     linkedLetter->next = NULL;
     liste->first = linkedLetter;
 
     return liste;
-
 }
 
-void listeInsertionBeginning(Liste *liste, Letter* l){
-    LinkedLetter *newLink = malloc(sizeof(*newLink));
+void listeInsertionBeginning(Liste* liste, Letter* l)
+{
+    LinkedLetter* newLink = malloc(sizeof(*newLink));
 
-    if(liste == NULL || newLink == NULL){
+    if (liste == NULL || newLink == NULL)
         exit(EXIT_FAILURE);
-    }
 
     newLink->lett = l;
 
@@ -37,12 +34,12 @@ void listeInsertionBeginning(Liste *liste, Letter* l){
 
 }
 
-void listeInsertionEnd(Liste *liste, Letter* l){
-    LinkedLetter *newLink = malloc(sizeof(*newLink));
+void listeInsertionEnd(Liste* liste, Letter* l)
+{
+    LinkedLetter* newLink = malloc(sizeof(*newLink));
 
-    if(liste == NULL || newLink == NULL){
+    if (liste == NULL || newLink == NULL)
         exit(EXIT_FAILURE);
-    }
 
     newLink->lett = l;
     newLink->next = NULL;
@@ -55,36 +52,31 @@ void listeInsertionEnd(Liste *liste, Letter* l){
         return;
     }
 
-    while(current->next != NULL){
+    while (current->next != NULL)
         current = current->next;
-    }
 
     current->next = newLink;
 
     return;
-
-
-
-
 }
 
-void deleteFirstOfListe(Liste *liste){
-    if(liste == NULL){
+void deleteFirstOfListe(Liste* liste)
+{
+    if (liste == NULL)
         exit(EXIT_FAILURE);
-    }
 
-    if(liste->first != NULL){
-        LinkedLetter *toDelete = liste->first;
+    if (liste->first != NULL)
+    {
+        LinkedLetter* toDelete = liste->first;
         liste->first = liste->first->next;
         free(toDelete);
     }
-
 }
 
-void displayListe(Liste *liste){
-    if(liste == NULL){
+void displayListe(Liste* liste)
+{
+    if (liste == NULL)
         exit(EXIT_FAILURE);
-    }
 
     LinkedLetter *current = liste->first;
 
@@ -94,15 +86,16 @@ void displayListe(Liste *liste){
     }
 }
 
-int sizeListe(Liste *liste){
-    if(liste == NULL){
+int sizeListe(Liste* liste)
+{
+    if (liste == NULL)
         exit(EXIT_FAILURE);
-    }
+
     int count = 0;
+    LinkedLetter* current = liste->first;
 
-    LinkedLetter *current = liste->first;
-
-    while(current != NULL){
+    while (current != NULL)
+    {
         count++;
         current = current->next;
     }
@@ -110,16 +103,16 @@ int sizeListe(Liste *liste){
     return count;
 }
 
-Letter* getLetterAtRank(Liste *liste, int rank){
-    if(liste == NULL){
+Letter* getLetterAtRank(Liste* liste, int rank)
+{
+    if (liste == NULL)
         exit(EXIT_FAILURE);
-    }
 
-    LinkedLetter *current = liste->first;
+    LinkedLetter* current = liste->first;
 
-    for(int i=1; i<rank; i++){
+    int i;
+    for (i = 1 ; i < rank ; i++)
         current = current->next;
-    }
 
     return current->lett;
 }

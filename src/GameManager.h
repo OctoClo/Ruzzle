@@ -14,8 +14,12 @@
 #include "Enums.h"
 
 struct Grid;
+struct Letter;
 
 typedef struct
+typedef struct GameManager GameManager;
+
+struct GameManager
 {
     Step step;
     SDL_Window* window;
@@ -25,12 +29,14 @@ typedef struct
 
 GameManager* createGameManager();
 void gameLoop(GameManager*);
-void freeGameManager(GameManager*);
-void cleanExit();
 
 void handleEvents(GameManager*, SDL_Event*);
 void update(GameManager*);
 void render(GameManager*);
+
+
+void freeGameManager(GameManager*);
+void cleanExit(void);
 
 void fatalError(GameManager*, const char*, const char*);
 

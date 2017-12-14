@@ -8,8 +8,8 @@ GameManager* createGameManager()
     GameManager* gameManager = malloc(sizeof(GameManager));
 
     // Initialize struct values
-    gameManager->window = malloc(sizeof gameManager->window);
-    gameManager->renderer = malloc(sizeof gameManager->renderer);
+    gameManager->window = malloc(sizeof(gameManager->window));
+    gameManager->renderer = malloc(sizeof(gameManager->renderer));
     gameManager->step = GAME;
 
     // Initialize all libraries; print eventual errors
@@ -55,33 +55,6 @@ void gameLoop(GameManager* gameManager)
     }
 }
 
-void freeGameManager(GameManager* gameManager)
-{
-    freeGrid(gameManager->grid);
-    free(gameManager->grid);
-    // Destroy renderer and window if created
-    if (gameManager->renderer != NULL)
-    {
-        SDL_DestroyRenderer(gameManager->renderer);
-        free(gameManager->renderer);
-    }
-    if (gameManager->window != NULL)
-    {
-        SDL_DestroyWindow(gameManager->window);
-        free(gameManager->window);
-    }
-}
-
-void cleanExit()
-{
-    // Quit every library that has been initialized
-    IMG_Quit();
-    if (TTF_WasInit())
-        TTF_Quit();
-    if (SDL_WasInit(SDL_INIT_VIDEO))
-        SDL_Quit();
-}
-
 void handleEvents(GameManager* gameManager, SDL_Event* e)
 {
     // Handle quit event
@@ -108,6 +81,34 @@ void render(GameManager* gameManager)
     SDL_RenderPresent(gameManager->renderer);
 }
 
+
+void cleanExit(void)
+{
+    // Quit every library that has been initialized
+    IMG_Quit();
+    if (TTF_WasInit())
+        TTF_Quit();
+    if (SDL_WasInit(SDL_INIT_VIDEO))
+        SDL_Quit();
+}
+
+void freeGameManager(GameManager* gameManager)
+{
+    freeGrid(gameManager->grid);
+    free(gameManager->grid);
+    // Destroy renderer and window if created
+    if (gameManager->renderer != NULL)
+    {
+        SDL_DestroyRenderer(gameManager->renderer);
+        free(gameManager->renderer);
+    }
+    if (gameManager->window != NULL)
+    {
+        SDL_DestroyWindow(gameManager->window);
+        free(gameManager->window);
+    }
+}
+
 void fatalError(GameManager* gameManager, const char* error, const char* library)
 {
     // Print error
@@ -124,3 +125,4 @@ void fatalError(GameManager* gameManager, const char* error, const char* library
     freeGameManager(gameManager);
     exit(EXIT_FAILURE);
 }
+
