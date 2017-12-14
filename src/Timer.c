@@ -6,10 +6,11 @@ Timer* createTimer(GameManager* gameManager)
     Timer* timer = malloc(sizeof(Timer));
     timer->timerTexture = malloc(sizeof(timer->timerTexture));
 
-    const char* fontPath = "./resources/fonts/Symtext.ttf";
-    timer->timerFont = TTF_OpenFont(fontPath, 32);
+    timer->timerFont = TTF_OpenFont(FONT_PATH, 32);
     if (timer->timerFont == NULL)
         fatalError(gameManager, "Error during font loading", "TTF");
+    timer->x = BEGIN_GRID_X + PIXELS_TO_CENTER_LETTER;
+    timer->y = 50;
 
     timer->time = 0, timer->currentTime = 0, timer->startTime = 0;
     timer->startTime = SDL_GetTicks();
@@ -67,7 +68,7 @@ void updateTimer(Timer* timer, GameManager* gameManager)
 
 void renderTimer(Timer* timer, SDL_Renderer* renderer)
 {
-    renderTexture(timer->timerTexture, 50, 50, renderer);
+    renderTexture(timer->timerTexture, timer->x, timer->y, renderer);
 }
 
 void freeTimer(Timer* timer)
@@ -75,37 +76,4 @@ void freeTimer(Timer* timer)
     freeTexture(timer->timerTexture);
     TTF_CloseFont(timer->timerFont);
 }
-
-/*int temps = 0, tempsActuel = 0, tempsDepart = 0;
-tempsDepart = SDL_GetTicks();
-
-while(temps<=120){
-
-     //printf("depart : %d, temps : %d, tempsActuel : %d\n",tempsDepart/1000,temps,tempsActuel/1000);
-     if(temps==0){
-        printf("2:00\n");
-     }
-     else if(temps<=50){
-        printf("1:%d\n",60-temps);
-     }
-     else if(temps>60&&temps<=110){
-        printf("0:%d\n",120-temps);
-     }
-     else{
-        if(temps>50 && temps<60){
-             printf("1:0%d\n",60-temps);
-        }
-        else{
-            printf("0:0%d\n",120-temps);
-        }
-
-     }
-     Sleep(1000);
-     tempsActuel = SDL_GetTicks();
-     temps=(tempsActuel/1000)-(tempsDepart/1000);
-}*/
-
-
-
-
 

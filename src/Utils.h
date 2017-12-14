@@ -12,6 +12,6 @@
 #define LETTER_ASSET_PIXELS 80
 #define PIXELS_TO_CENTER_LETTER ((GRID_CELL_SIZE - LETTER_ASSET_PIXELS) / 2) // 10
 
-char* convertCharToCharAsterisk(char);
+#define FONT_PATH "./resources/fonts/Symtext.ttf"
 
 #endif // UTILS_H

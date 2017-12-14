@@ -119,8 +119,12 @@ void cleanExit(void)
 
 void freeGameManager(GameManager* gameManager)
 {
+    freeTimer(gameManager->timer);
+    free(gameManager->timer);
+
     freeGrid(gameManager->grid);
     free(gameManager->grid);
+
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
     {
@@ -137,7 +141,8 @@ void freeGameManager(GameManager* gameManager)
 void fatalError(GameManager* gameManager, const char* error, const char* library)
 {
     // Print error
-    SDL_Log("Fatal error ! ", error);
+    SDL_Log("Fatal error ! ");
+    SDL_Log(error);
 
 	// Print details
 	if (strcmp(library, "SDL") == 0)

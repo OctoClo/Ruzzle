@@ -18,10 +18,10 @@ struct Letter
     char character;
     int weight;
     Modifier modif;
-    Texture* tile;
-    Texture* bonus;
+    struct Texture* tile;
+    struct Texture* bonus;
     int selected;
-    Texture* selectedTile;
+    struct Texture* selectedTile;
     int x, y;
 };
 

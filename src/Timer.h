@@ -10,6 +10,7 @@
 
 #include "Texture.h"
 #include "GameManager.h"
+#include "Utils.h"
 
 typedef struct Timer Timer;
 struct Timer
@@ -17,7 +18,9 @@ struct Timer
     Texture* timerTexture;
     TTF_Font* timerFont;
     SDL_Color timerColor;
+    int x, y;
     char timerText[20];
+
     int time;
     int currentTime;
     int startTime;
