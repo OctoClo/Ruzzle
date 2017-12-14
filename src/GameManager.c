@@ -36,6 +36,7 @@ GameManager* createGameManager()
     if (!gameManager->renderer)
         fatalError(gameManager, "Error during render creation", "SDL");
 
+    gameManager->timer = createTimer(gameManager);
     gameManager->grid = createGrid(gameManager);
 
     return gameManager;
@@ -57,8 +58,13 @@ void gameLoop(GameManager* gameManager)
 
 void freeGameManager(GameManager* gameManager)
 {
+    // Destroy gameManager pointers
+    freeTimer(gameManager->timer);
+    free(gameManager->timer);
+
     freeGrid(gameManager->grid);
     free(gameManager->grid);
+    
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
     {
@@ -94,6 +100,7 @@ void handleEvents(GameManager* gameManager, SDL_Event* e)
 void update(GameManager* gameManager)
 {
     // Update things
+    updateTimer(gameManager->timer, gameManager);
 }
 
 void render(GameManager* gameManager)
@@ -104,6 +111,7 @@ void render(GameManager* gameManager)
 
     // Render things
     renderGrid(gameManager->grid, gameManager->renderer);
+    renderTimer(gameManager->timer, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
 }

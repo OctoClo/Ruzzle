@@ -15,13 +15,16 @@
 
 struct Grid;
 
-typedef struct
+struct Timer;
+
+typedef struct GameManager GameManager;
+struct GameManager
 {
     Step step;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    struct Grid* grid;
-} GameManager;
+    struct Timer* timer;
+};
 
 GameManager* createGameManager();
 void gameLoop(GameManager*);
