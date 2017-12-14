@@ -6,9 +6,6 @@ Liste* listeInitialisation()
     Liste* liste = malloc(sizeof(*liste));
     LinkedLetter* linkedLetter = malloc(sizeof(*linkedLetter));
 
-    if (liste == NULL || linkedLetter == NULL)
-        exit(EXIT_FAILURE);
-
     linkedLetter->lett = NULL;
     linkedLetter->next = NULL;
     liste->first = linkedLetter;
@@ -19,9 +16,6 @@ Liste* listeInitialisation()
 void listeInsertionBeginning(Liste* liste, Letter* l)
 {
     LinkedLetter* newLink = malloc(sizeof(*newLink));
-
-    if (liste == NULL || newLink == NULL)
-        exit(EXIT_FAILURE);
 
     newLink->lett = l;
 
@@ -36,9 +30,6 @@ void listeInsertionBeginning(Liste* liste, Letter* l)
 void listeInsertionEnd(Liste* liste, Letter* l)
 {
     LinkedLetter* newLink = malloc(sizeof(*newLink));
-
-    if (liste == NULL || newLink == NULL)
-        exit(EXIT_FAILURE);
 
     newLink->lett = l;
     newLink->next = NULL;
@@ -61,9 +52,6 @@ void listeInsertionEnd(Liste* liste, Letter* l)
 
 void deleteFirstOfListe(Liste* liste)
 {
-    if (liste == NULL)
-        exit(EXIT_FAILURE);
-
     if (liste->first != NULL)
     {
         LinkedLetter* toDelete = liste->first;
@@ -74,9 +62,6 @@ void deleteFirstOfListe(Liste* liste)
 
 void displayListe(Liste* liste)
 {
-    if (liste == NULL)
-        exit(EXIT_FAILURE);
-
     LinkedLetter* current = liste->first;
 
     // Added empty word case (necessary ?)
@@ -98,9 +83,6 @@ void displayListe(Liste* liste)
 
 int sizeListe(Liste* liste)
 {
-    if (liste == NULL)
-        exit(EXIT_FAILURE);
-
     int count = 0;
     LinkedLetter* current = liste->first;
 
@@ -115,9 +97,6 @@ int sizeListe(Liste* liste)
 
 Letter* getLetterAtRank(Liste* liste, int rank)
 {
-    if (liste == NULL)
-        exit(EXIT_FAILURE);
-
     LinkedLetter* current = liste->first;
 
     int i;
