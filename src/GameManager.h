@@ -15,14 +15,15 @@
 typedef enum Step Step;
 enum Step { GAME, QUIT };
 
+struct Timer;
+
 typedef struct GameManager GameManager;
 struct GameManager
 {
     Step step;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    Texture* letter;
-    Texture* bonus;
+    struct Timer* timer;
 };
 
 void initGameManager(GameManager*);
