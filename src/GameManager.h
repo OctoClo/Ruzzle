@@ -10,40 +10,38 @@
 #include <stdlib.h>
 #include "string.h"
 
-#include "Texture.h"
-#include "Enums.h"
 #include "Utils.h"
-#include "Word.h"
+#include "Enums.h"
 
-struct Grid;
-struct Letter;
+typedef struct _word Word;
+typedef struct _letter Letter;
+typedef struct _interface Interface;
 
-struct Timer;
-
-typedef struct GameManager GameManager;
-struct GameManager
+typedef struct _gameManager
 {
     Step step;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    struct Grid* grid;
-    struct Word* currentWord;
-    struct Timer* timer;
-};
+    Word* currentWord;
+    Interface* interfaceR;
+} GameManager;
 
-GameManager* createGameManager();
-void gameLoop(GameManager*);
+GameManager* gameManager;
 
-void handleEvents(GameManager*, SDL_Event*);
-void update(GameManager*);
-void render(GameManager*);
+void initGameManager(void);
+void initSDL(void);
+void gameLoop(void);
 
-void addLetter(GameManager*, struct Letter*);
-void finishWord(GameManager*);
+void handleEvents(SDL_Event*);
+void update(void);
+void render(void);
 
-void freeGameManager(GameManager*);
+void addLetter(Letter*);
+void finishWord(void);
+
+void freeGameManager(void);
 void cleanExit(void);
 
-void fatalError(GameManager*, const char*, const char*);
+void fatalError(const char*, const char*);
 
 #endif // GAME_MANAGER_H

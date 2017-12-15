@@ -8,21 +8,19 @@
 #include "Letter.h"
 #include "LinkedLetter.h"
 
-typedef struct Word Word;
-
-struct Word
+typedef struct _word
 {
-    struct Liste* word;
-};
+    Liste* word;
+} Word;
 
 Word* initWord(void);
 
-void addLetterInWord(Word*, struct Letter*);
+void addLetterInWord(Word*, Letter*);
 void displayWord(Word*);
 int scoreWord(Word*);
 int sizeWord(Word*);
 
 char* getWord(Word*);
-struct Letter* getLetter(Word*, int);
+Letter* getLetter(Word*, int);
 
 #endif // WORD_H_INCLUDED

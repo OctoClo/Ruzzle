@@ -1,14 +1,14 @@
 #include "timer.h"
 
 
-Timer* createTimer(GameManager* gameManager)
+Timer* createTimer(void)
 {
     Timer* timer = malloc(sizeof(Timer));
     timer->timerTexture = malloc(sizeof(timer->timerTexture));
 
     timer->timerFont = TTF_OpenFont(FONT_PATH, 32);
     if (timer->timerFont == NULL)
-        fatalError(gameManager, "Error during font loading", "TTF");
+        fatalError("Error during font loading", "TTF");
     timer->x = BEGIN_GRID_X + PIXELS_TO_CENTER_LETTER;
     timer->y = 50;
 
@@ -18,7 +18,7 @@ Timer* createTimer(GameManager* gameManager)
     return timer;
 }
 
-void updateTimer(Timer* timer, GameManager* gameManager)
+void updateTimer(Timer* timer)
 {
     char* time[50];
     if (timer->time > 120)
@@ -62,7 +62,7 @@ void updateTimer(Timer* timer, GameManager* gameManager)
 
     SDL_Color timerColor = { 255, 255, 255 };
     if (createTextTexture(timer->timerTexture, timer->timerText, &timerColor, timer->timerFont, gameManager->renderer) == SDL_FALSE)
-        fatalError(gameManager, "Error during timer texture creation", "TTF");
+        fatalError("Error during timer texture creation", "TTF");
     timer->timerText[0] = '\0';
 }
 

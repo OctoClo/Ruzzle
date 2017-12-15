@@ -7,7 +7,7 @@ Word* initWord(void)
     return w;
 }
 
-void addLetterInWord(Word* w, struct Letter* l)
+void addLetterInWord(Word* w, Letter* l)
 {
     listeInsertionEnd(w->word, l);
 }
