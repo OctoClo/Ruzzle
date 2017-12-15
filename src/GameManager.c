@@ -25,7 +25,6 @@ void initGameManager(void)
         fatalError("Error during render creation", "SDL");
 
     gameManager->interfaceR = createInterface(gameManager);
-    gameManager->currentWord = initWord();
 }
 
 void initSDL(void)
@@ -85,21 +84,6 @@ void render(void)
     renderInterface(gameManager->interfaceR, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
-}
-
-void addLetter(Letter* letter)
-{
-    SDL_Log("Letter added !");
-    addLetterInWord(gameManager->currentWord, letter);
-    setSelectedLetter(letter, 1);
-    displayWord(gameManager->currentWord);
-}
-
-void finishWord(void)
-{
-    SDL_Log("Word finished !");
-    gameManager->currentWord = initWord();
-    handleFinishWord(gameManager->interfaceR);
 }
 
 void cleanExit(void)

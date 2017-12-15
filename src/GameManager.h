@@ -13,8 +13,6 @@
 #include "Utils.h"
 #include "Enums.h"
 
-typedef struct _word Word;
-typedef struct _letter Letter;
 typedef struct _interface Interface;
 
 typedef struct _gameManager
@@ -22,7 +20,6 @@ typedef struct _gameManager
     Step step;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    Word* currentWord;
     Interface* interfaceR;
 } GameManager;
 
@@ -35,9 +32,6 @@ void gameLoop(void);
 void handleEvents(SDL_Event*);
 void update(void);
 void render(void);
-
-void addLetter(Letter*);
-void finishWord(void);
 
 void freeGameManager(void);
 void cleanExit(void);

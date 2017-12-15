@@ -20,6 +20,9 @@ void displayWord(Word* w)
 char* getWord(Word* w)
 {
     int word_size = sizeWord(w);
+    if (getLetter(w, 1) == NULL)
+        return "";
+
     char* word = malloc(sizeof(*word)*word_size);
     int i;
     for(i = 0 ; i < word_size ; i++)
@@ -69,13 +72,15 @@ int sizeWord(Word* w)
     return sizeWord;
 }
 
-Letter* getLetter(Word* w,int rank)
+int isEmptyWord(Word* w)
+{
+    return ((getLetter(w, 1) == NULL) ? 1 : 0);
+}
+
+Letter* getLetter(Word* w, int rank)
 {
     if (rank <= sizeWord(w) && rank > 0)
         return getLetterAtRank(w->word, rank);
     else
-    {
-        printf("Erreur : le rang doit exister dans le mot");
-        exit(EXIT_FAILURE);
-    }
+        fatalError("Trying to access invalid rank letter in word !", "");
 }

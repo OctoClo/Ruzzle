@@ -19,6 +19,7 @@ void addLetterInWord(Word*, Letter*);
 void displayWord(Word*);
 int scoreWord(Word*);
 int sizeWord(Word*);
+int isEmptyWord(Word*);
 
 char* getWord(Word*);
 Letter* getLetter(Word*, int);

@@ -64,14 +64,12 @@ void displayListe(Liste* liste)
 {
     LinkedLetter* current = liste->first;
 
-    // Added empty word case (necessary ?)
     if (current != NULL && current->lett == NULL)
         SDL_Log("Empty word !");
     else
     {
         while (current != NULL)
         {
-            // Corrected character display
             char character[2];
             character[0] = current->lett->character;
             character[1] = '\0';

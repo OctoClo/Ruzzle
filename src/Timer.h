@@ -14,11 +14,11 @@
 
 typedef struct _timer
 {
-    Texture* timerTexture;
-    TTF_Font* timerFont;
-    SDL_Color timerColor;
+    Texture* texture;
+    TTF_Font* font;
+    SDL_Color color;
     int x, y;
-    char timerText[20];
+    char text[20];
 
     int time;
     int currentTime;
