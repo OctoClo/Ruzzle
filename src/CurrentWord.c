@@ -6,12 +6,12 @@ CurrentWord* createCurrentWord(void)
 
     currentWord->texture = malloc(sizeof(currentWord->texture));
 
-    currentWord->font = TTF_OpenFont(FONT_PATH, 32);
+    currentWord->font = TTF_OpenFont(FONT_PATH, 40);
     if (currentWord->font == NULL)
         fatalError("Error during font loading - CurrentWord", "TTF");
 
     currentWord->x = (WINDOW_WIDTH / 2);
-    currentWord->y = 120;
+    currentWord->y = 110;
 
     currentWord->word = initWord();
 
