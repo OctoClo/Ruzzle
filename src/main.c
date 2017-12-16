@@ -5,10 +5,10 @@
 
 int main(int argc, char** argv)
 {
-    GameManager* gameManager = createGameManager();
-    gameLoop(gameManager);
+    initGameManager();
+    gameLoop();
 
-    freeGameManager(gameManager);
+    freeGameManager();
     free(gameManager);
 
     return EXIT_SUCCESS;

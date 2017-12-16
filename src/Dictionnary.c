@@ -52,23 +52,64 @@ bool searchNode(TrieNode* root, const char* word){
 
 }
 
+
+
 bool checkIfLetterIsPossible(TrieNode* root, Word* word, Letter* letter){
+
     int length = strlen(getWord(word));
+
     int indexWord;
+
     int indexLetter = CHAR_TO_INDEX(letter->character);
+
+
 
     TrieNode* currentNode = root;
 
+
+
     for(int level = 0; level<length; level++){
+
+
 
         indexWord = CHAR_TO_INDEX(getLetter(word, level)->character);
 
+
+
         if(!currentNode->children[indexWord]){
+
             return false;
+
         }
 
+
+
         currentNode = currentNode->children[indexWord];
+
     }
 
+
+
     return (currentNode != NULL && currentNode->children[indexLetter] != NULL);
+
+}
+
+TrieNode* possibleWordInGrid(Interface* interfaceR){
+    Grid* currentGrid = interfaceR->grid;
+    TrieNode* root = initNode();
+    int row, column;
+    for(row=0; row<4;row++){
+        for(column=0;column<4; column++){
+            if(currentGrid->grid[row][column] != NULL){
+
+            }
+
+        }
+    }
+}
+
+
+Word* checkWordInGrid(Interface* interfaceR, Word* word){
+    Letter* lastLetter = getLetter(word, sizeWord(word));
+    SDL_Log("%c", lastLetter->character);
 }

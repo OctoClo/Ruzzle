@@ -1,6 +1,7 @@
 #include "Letter.h"
+#include "GameManager.h"
 
-Letter* createLetter(struct GameManager* gameManager, char c, int x, int y, Modifier modif)
+Letter* createLetter(char c, int x, int y, Modifier modif)
 {
     Letter* letter = malloc(sizeof(Letter));
     letter->modif = modif;
@@ -44,7 +45,7 @@ Letter* createLetter(struct GameManager* gameManager, char c, int x, int y, Modi
     strcat(tilePath, extension);
 
     if (createImageTexture(letter->tile, tilePath, gameManager->renderer) == SDL_FALSE)
-        fatalError(gameManager, "Error during letter's texture creation", "IMG");
+        fatalError("Error during letter's texture creation", "IMG");
 
     letter->selectedTile = malloc(sizeof letter->selectedTile);
     char selectedTilePath[50] = "./resources/assets/letters/s_letter_";
@@ -54,7 +55,7 @@ Letter* createLetter(struct GameManager* gameManager, char c, int x, int y, Modi
     strcat(selectedTilePath, extension);
 
     if (createImageTexture(letter->selectedTile, selectedTilePath, gameManager->renderer) == SDL_FALSE)
-        fatalError(gameManager, "Error during letter's selected texture creation", "IMG");
+        fatalError("Error during letter's selected texture creation", "IMG");
 
     if (letter->modif != NONE)
     {
@@ -79,7 +80,7 @@ Letter* createLetter(struct GameManager* gameManager, char c, int x, int y, Modi
         strcat(bonusPath, extension);
 
         if (createImageTexture(letter->bonus, bonusPath, gameManager->renderer) == SDL_FALSE)
-            fatalError(gameManager, "Error during bonus' texture creation", "IMG");
+            fatalError("Error during bonus' texture creation", "IMG");
     }
 
     return letter;
