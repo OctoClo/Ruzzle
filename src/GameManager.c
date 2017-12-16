@@ -147,12 +147,6 @@ void freeGameManager(GameManager* gameManager)
         SDL_DestroyRenderer(gameManager->renderer);
         free(gameManager->renderer);
     }
-    if (gameManager->window != NULL)
-    {
-        SDL_DestroyWindow(gameManager->window);
-        free(gameManager->window);
-    }
-}
 
 void fatalError(GameManager* gameManager, const char* error, const char* library)
 {
