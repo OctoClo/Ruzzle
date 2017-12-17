@@ -45,19 +45,16 @@ void updateInterface(Interface* interfaceR)
 
 void renderInterface(Interface* interfaceR, SDL_Renderer* renderer)
 {
-    renderGrid(interfaceR->grid, renderer);
     renderTimer(interfaceR->timer, renderer);
+    renderGrid(interfaceR->grid, renderer);
     renderCurrentWord(interfaceR->currentWord, renderer);
 }
 
 void freeInterface(Interface* interfaceR)
 {
     freeCurrentWord(interfaceR->currentWord);
-    free(interfaceR->currentWord);
-
-    freeTimer(interfaceR->timer);
-    free(interfaceR->timer);
-
     freeGrid(interfaceR->grid);
-    free(interfaceR->grid);
+    freeTimer(interfaceR->timer);
+    free(interfaceR);
+    interfaceR = NULL;
 }

@@ -4,7 +4,7 @@ CurrentWord* createCurrentWord(void)
 {
     CurrentWord* currentWord = malloc(sizeof(CurrentWord));
 
-    currentWord->texture = malloc(sizeof(currentWord->texture));
+    currentWord->texture = malloc(sizeof(Texture));
 
     currentWord->font = TTF_OpenFont(FONT_PATH, 40);
     if (currentWord->font == NULL)
@@ -20,13 +20,13 @@ CurrentWord* createCurrentWord(void)
 
 void addLetter(CurrentWord* currentWord, Letter* letter)
 {
-
     addLetterInWord(currentWord->word, letter);
     displayWord(currentWord->word);
 }
 
 void finishWord(CurrentWord* currentWord)
 {
+    gameManager->wordsCount++;
     currentWord->word = initWord();
 }
 
@@ -52,7 +52,14 @@ void renderCurrentWord(CurrentWord* currentWord, SDL_Renderer* renderer)
         renderTexture(currentWord->texture, currentWord->x, currentWord->y, renderer);
 }
 
-void freeCurrentWord(CurrentWord* CurrentWord)
+void freeCurrentWord(CurrentWord* currentWord)
 {
+    if (gameManager->wordsCount > 0)
+        freeTexture(currentWord->texture);
 
+    TTF_CloseFont(currentWord->font);
+    currentWord->font = NULL;
+
+    free(currentWord);
+    currentWord = NULL;
 }

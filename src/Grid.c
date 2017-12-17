@@ -67,10 +67,9 @@ void freeGrid(Grid* grid)
     for (row = 0; row < GRID_SIZE; row++)
     {
         for (column = 0; column < GRID_SIZE; column++)
-        {
             freeLetter(grid->grid[row][column]);
-            free(grid->grid[row][column]);
-        }
     }
     free(grid->grid);
+    free(grid);
+    grid = NULL;
 }

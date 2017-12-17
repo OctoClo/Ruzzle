@@ -25,6 +25,7 @@ void initGameManager(void)
         fatalError("Error during render creation", "SDL");
 
     gameManager->interfaceR = createInterface(gameManager);
+    gameManager->wordsCount = 0;
 }
 
 void initSDL(void)
@@ -102,15 +103,13 @@ void freeGameManager(void)
 
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
-    {
         SDL_DestroyRenderer(gameManager->renderer);
-        free(gameManager->renderer);
-    }
+
     if (gameManager->window != NULL)
-    {
         SDL_DestroyWindow(gameManager->window);
-        free(gameManager->window);
-    }
+
+    free(gameManager);
+    gameManager = NULL;
 }
 
 void fatalError(const char* error, const char* library)
@@ -125,7 +124,7 @@ void fatalError(const char* error, const char* library)
     else if (strcmp(library, "TTF") == 0)
         SDL_Log(TTF_GetError());
     else if (strcmp(library, "IMG") == 0)
-        SDL_Log(TTF_GetError());
+        SDL_Log(IMG_GetError());
 
     freeGameManager();
     exit(EXIT_FAILURE);

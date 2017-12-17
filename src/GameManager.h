@@ -21,6 +21,7 @@ typedef struct _gameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     Interface* interfaceR;
+    int wordsCount;
 } GameManager;
 
 GameManager* gameManager;
