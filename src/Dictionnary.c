@@ -68,7 +68,7 @@ bool checkIfLetterIsPossible(TrieNode* root, Word* word, Letter* letter){
 
 
 
-    for(int level = 0; level<length; level++){
+    for(int level = 1; level<=length; level++){
 
 
 
@@ -94,8 +94,8 @@ bool checkIfLetterIsPossible(TrieNode* root, Word* word, Letter* letter){
 
 }
 
-TrieNode* possibleWordInGrid(Interface* interfaceR){
-    Grid* currentGrid = interfaceR->grid;
+TrieNode* possibleWordInGrid(){
+    Grid* currentGrid = gameManager->interfaceR->grid;
     TrieNode* root = initNode();
     int row, column;
     for(row=0; row<4;row++){
@@ -109,7 +109,8 @@ TrieNode* possibleWordInGrid(Interface* interfaceR){
 }
 
 
-Word* checkWordInGrid(Interface* interfaceR, Word* word){
+Word* checkWordInGrid(Word* word){
     Letter* lastLetter = getLetter(word, sizeWord(word));
-    SDL_Log("%c", lastLetter->character);
+    switch()
+
 }

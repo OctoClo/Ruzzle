@@ -1,5 +1,4 @@
 #include "Letter.h"
-#include "GameManager.h"
 
 Letter* createLetter(char c, int x, int y, Modifier modif)
 {
@@ -36,7 +35,7 @@ Letter* createLetter(char c, int x, int y, Modifier modif)
     }
     letter->character = c;
 
-    letter->tile = malloc(sizeof letter->tile);
+    letter->tile = malloc(sizeof(Texture));
     char tilePath[50] = "./resources/assets/letters/letter_";
     char extension[5] = ".png";
     int tileLength = strlen("./resources/assets/letters/letter_");
@@ -47,7 +46,7 @@ Letter* createLetter(char c, int x, int y, Modifier modif)
     if (createImageTexture(letter->tile, tilePath, gameManager->renderer) == SDL_FALSE)
         fatalError("Error during letter's texture creation", "IMG");
 
-    letter->selectedTile = malloc(sizeof letter->selectedTile);
+    letter->selectedTile = malloc(sizeof(Texture));
     char selectedTilePath[50] = "./resources/assets/letters/s_letter_";
     int selectedTileLength = strlen("./resources/assets/letters/s_letter_");
     selectedTilePath[selectedTileLength] = letter->character;
@@ -59,7 +58,7 @@ Letter* createLetter(char c, int x, int y, Modifier modif)
 
     if (letter->modif != NONE)
     {
-        letter->bonus = malloc(sizeof letter->bonus);
+        letter->bonus = malloc(sizeof(Texture));
 
         char bonusPath[50] = "./resources/assets/bonuses/bonus_";
         switch (letter->modif)
@@ -136,6 +135,10 @@ void renderLetter(Letter* letter, SDL_Renderer* renderer)
 void freeLetter(Letter* letter)
 {
     freeTexture(letter->tile);
+    freeTexture(letter->selectedTile);
     if (letter->modif != NONE)
         freeTexture(letter->bonus);
+
+    free(letter);
+    letter = NULL;
 }

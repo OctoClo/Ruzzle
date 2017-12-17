@@ -9,6 +9,7 @@
 
 #include "Enums.h"
 #include "Texture.h"
+#include "GameManager.h"
 
 typedef struct _letter
 {

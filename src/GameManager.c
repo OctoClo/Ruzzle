@@ -28,7 +28,7 @@ void initGameManager(void)
         fatalError("Error during render creation", "SDL");
 
 
-    FILE* dico = NULL;
+FILE* dico = NULL;
     char word[TAILLE_MAX];
 
     //Ouverture du fichier dico
@@ -63,11 +63,17 @@ void initGameManager(void)
     }
 
 
+    Word* w = initWord();
 
-    /*addLetterInWord(w, createLetter('a',0 ,0, NONE));
-    if(checkIfLetterIsPossible(root, w, createLetter('m', 0, 0, NONE))){
-        SDL_Log("Fonction operationnelle");
-    }*/
+    addLetterInWord(w, createLetter('j',5 ,5 , NONE));
+    addLetterInWord(w, createLetter('a',6 ,6 , NONE));
+
+    if(checkIfLetterIsPossible(root, w, createLetter('a', 7, 7, NONE))){
+        SDL_Log("Lettre possible");
+    }else{
+        SDL_Log("Lettre impossible");
+    }
+
 
 
 
@@ -133,6 +139,8 @@ void render(void)
     renderInterface(gameManager->interfaceR, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
+
+
 }
 
 void cleanExit(void)

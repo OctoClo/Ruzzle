@@ -67,9 +67,9 @@ void renderTexture(Texture* texture, int x, int y, SDL_Renderer* renderer)
 void freeTexture(Texture* texture)
 {
     if (texture->texture != NULL)
-	{
-		SDL_DestroyTexture(texture->texture);
-		free(texture->texture);
-	}
+        SDL_DestroyTexture(texture->texture);
+
+    free(texture);
+    texture = NULL;
 }
 

@@ -5,7 +5,7 @@ Timer* createTimer(void)
 {
     Timer* timer = malloc(sizeof(Timer));
 
-    timer->texture = malloc(sizeof(timer->texture));
+    timer->texture = malloc(sizeof(Texture));
 
     timer->font = TTF_OpenFont(FONT_PATH, 32);
     if (timer->font == NULL)
@@ -65,6 +65,7 @@ void updateTimer(Timer* timer)
     SDL_Color timerColor = { 255, 255, 255 };
     if (createTextTexture(timer->texture, timer->text, &timerColor, timer->font, gameManager->renderer) == SDL_FALSE)
         fatalError("Error during timer texture creation", "TTF");
+
     timer->text[0] = '\0';
 }
 
@@ -76,6 +77,11 @@ void renderTimer(Timer* timer, SDL_Renderer* renderer)
 void freeTimer(Timer* timer)
 {
     freeTexture(timer->texture);
+
     TTF_CloseFont(timer->font);
+    timer->font = NULL;
+
+    free(timer);
+    timer = NULL;
 }
 

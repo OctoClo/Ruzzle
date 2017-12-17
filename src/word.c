@@ -79,6 +79,7 @@ int isEmptyWord(Word* w)
 
 Letter* getLetter(Word* w, int rank)
 {
+
     if (rank <= sizeWord(w) && rank > 0)
         return getLetterAtRank(w->word, rank);
     else

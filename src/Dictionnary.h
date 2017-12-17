@@ -34,8 +34,8 @@ bool searchNode(TrieNode*, const char*);
 
 bool checkIfLetterIsPossible(TrieNode*, Word*, Letter*);
 
-TrieNode* possibleWordInGrid(Interface*);
-Word* checkWordInGrid(Interface*, Word*);
+TrieNode* possibleWordInGrid();
+Word* checkWordInGrid(Word*);
 
 
 

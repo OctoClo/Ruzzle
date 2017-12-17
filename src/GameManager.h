@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "string.h"
 
 #include "Utils.h"
@@ -23,6 +22,7 @@ typedef struct _gameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     Interface* interfaceR;
+    int wordsCount;
 } GameManager;
 
 GameManager* gameManager;
