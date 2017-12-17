@@ -11,7 +11,7 @@ CurrentWord* createCurrentWord(void)
         fatalError("Error during font loading - CurrentWord", "TTF");
 
     currentWord->x = (WINDOW_WIDTH / 2);
-    currentWord->y = 110;
+    currentWord->y = 90;
 
     currentWord->word = initWord();
 

@@ -11,7 +11,7 @@ Score* createScore(void)
         fatalError("Error during font loading - Score", "TTF");
 
     score->x = WINDOW_WIDTH - BEGIN_GRID_X - PIXELS_TO_CENTER_LETTER;
-    score->y = 50;
+    score->y = 30;
 
     score->score = 0;
 
@@ -28,7 +28,7 @@ void updateScore(Score* score)
     itoa(score->score, score->text, 10);
     SDL_Color color = { 255, 255, 255 };
     if (createTextTexture(score->texture, score->text, &color, score->font, gameManager->renderer) == SDL_FALSE)
-        fatalError("Error during current score texture creation", "TTF");
+        fatalError("Error during score texture creation", "TTF");
 
     score->text[0] = '\0';
     score->x = WINDOW_WIDTH - BEGIN_GRID_X - PIXELS_TO_CENTER_LETTER - score->texture->width;

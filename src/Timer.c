@@ -12,7 +12,7 @@ Timer* createTimer(void)
         fatalError("Error during font loading - Timer", "TTF");
 
     timer->x = BEGIN_GRID_X + PIXELS_TO_CENTER_LETTER;
-    timer->y = 50;
+    timer->y = 30;
 
     timer->time = 0, timer->currentTime = 0, timer->startTime = 0;
     timer->startTime = SDL_GetTicks();

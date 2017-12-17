@@ -1,19 +1,27 @@
 #include "GameManager.h"
 
+void initSDL(void)
+{
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+        fatalError("Error during SDL initialization", "SDL");
+
+    if (TTF_Init() != 0)
+		fatalError("Error during SDL_ttf initialization", "TTF");
+
+	int imageFlags = IMG_INIT_JPG | IMG_INIT_PNG;
+	int imageBitmask = IMG_Init(imageFlags);
+	if ((imageBitmask & imageFlags) != imageFlags)
+		fatalError("Error during SDL_image initialization", "IMG");
+}
+
 void initGameManager(void)
 {
-    // Declare which function to call on program exit
-    atexit(cleanExit);
-
     gameManager = malloc(sizeof(GameManager));
 
     // Initialize struct values
     gameManager->window = malloc(sizeof(gameManager->window));
     gameManager->renderer = malloc(sizeof(gameManager->renderer));
     gameManager->step = GAME;
-
-    // Initialize all libraries
-    initSDL();
 
     // Create game window and renderer
     gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
@@ -29,20 +37,6 @@ void initGameManager(void)
     gameManager->words = NULL;
 }
 
-void initSDL(void)
-{
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
-        fatalError("Error during SDL initialization", "SDL");
-
-    if (TTF_Init() != 0)
-		fatalError("Error during SDL_ttf initialization", "TTF");
-
-	int imageFlags = IMG_INIT_JPG | IMG_INIT_PNG;
-	int imageBitmask = IMG_Init(imageFlags);
-	if ((imageBitmask & imageFlags) != imageFlags)
-		fatalError("Error during SDL_image initialization", "IMG");
-}
-
 void gameLoop(void)
 {
     SDL_Event event;
@@ -50,6 +44,12 @@ void gameLoop(void)
     // Game loop : handle every event, update and render game
     while (gameManager->step != QUIT)
     {
+        if (gameManager->step == REPLAY)
+        {
+            freeGameManager();
+            initGameManager();
+        }
+
         while (SDL_PollEvent(&event))
             handleEvents(&event);
         update();

@@ -13,14 +13,15 @@
 
 typedef struct _letter
 {
+    Texture* tile;
+    Texture* bonus;
+    Texture* selectedTile;
+    int x, y;
+
     char character;
     int weight;
     Modifier modif;
-    Texture* tile;
-    Texture* bonus;
     int selected;
-    Texture* selectedTile;
-    int x, y;
 } Letter;
 
 Letter* createLetter(char, int, int, Modifier);

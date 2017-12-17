@@ -7,14 +7,19 @@
 #include "Timer.h"
 #include "CurrentWord.h"
 #include "Score.h"
+#include "Button.h"
 #include "Letter.h"
 
 typedef struct _interface
 {
-    Grid* grid;
     Timer* timer;
-    CurrentWord* currentWord;
     Score* score;
+
+    CurrentWord* currentWord;
+    Grid* grid;
+
+    Button* buttonEnd;
+    Button* buttonQuit;
 } Interface;
 
 Interface* createInterface(void);

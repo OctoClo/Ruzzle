@@ -29,8 +29,8 @@ typedef struct _gameManager
 
 GameManager* gameManager;
 
-void initGameManager(void);
 void initSDL(void);
+void initGameManager(void);
 void gameLoop(void);
 
 void addWord(Word*);

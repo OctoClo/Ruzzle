@@ -5,9 +5,13 @@ Interface* createInterface(void)
     Interface* interfaceR = malloc(sizeof(Interface));
 
     interfaceR->timer = createTimer();
-    interfaceR->grid = createGrid();
-    interfaceR->currentWord = createCurrentWord();
     interfaceR->score = createScore();
+
+    interfaceR->currentWord = createCurrentWord();
+    interfaceR->grid = createGrid();
+
+    interfaceR->buttonEnd = createButton("./resources/assets/buttons/button_end.png", 75, 600);
+    interfaceR->buttonQuit = createButton("./resources/assets/buttons/button_quit.png", 275, 600);
 
     return interfaceR;
 }
@@ -19,6 +23,10 @@ void handleClick(Interface* interfaceR, SDL_Event* e)
         Letter* letter = getLetterCoord(gameManager->interfaceR->grid, e->button.x, e->button.y);
         if (letter != NULL)
             handleAddLetter(gameManager->interfaceR, letter);
+        else if (isClickedButton(interfaceR->buttonEnd, e->button.x, e->button.y) == 1)
+            gameManager->step = REPLAY;
+        else if (isClickedButton(interfaceR->buttonQuit, e->button.x, e->button.y) == 1)
+            gameManager->step = QUIT;
     }
     else if (e->button.button == SDL_BUTTON_RIGHT)
         handleFinishWord(gameManager->interfaceR);
@@ -44,24 +52,33 @@ void handleFinishWord(Interface* interfaceR)
 void updateInterface(Interface* interfaceR)
 {
     updateTimer(interfaceR->timer);
-    updateCurrentWord(interfaceR->currentWord);
     updateScore(interfaceR->score);
+
+    updateCurrentWord(interfaceR->currentWord);
 }
 
 void renderInterface(Interface* interfaceR, SDL_Renderer* renderer)
 {
     renderTimer(interfaceR->timer, renderer);
-    renderGrid(interfaceR->grid, renderer);
-    renderCurrentWord(interfaceR->currentWord, renderer);
     renderScore(interfaceR->score, renderer);
+
+    renderCurrentWord(interfaceR->currentWord, renderer);
+    renderGrid(interfaceR->grid, renderer);
+
+    renderButton(interfaceR->buttonEnd, renderer);
+    renderButton(interfaceR->buttonQuit, renderer);
 }
 
 void freeInterface(Interface* interfaceR)
 {
-    freeCurrentWord(interfaceR->currentWord);
+    freeButton(interfaceR->buttonQuit);
+    freeButton(interfaceR->buttonEnd);
+
     freeGrid(interfaceR->grid);
-    freeTimer(interfaceR->timer);
+    freeCurrentWord(interfaceR->currentWord);
+
     freeScore(interfaceR->score);
+    freeTimer(interfaceR->timer);
 
     free(interfaceR);
     interfaceR = NULL;
