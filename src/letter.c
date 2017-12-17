@@ -1,11 +1,13 @@
 #include "Letter.h"
 
-Letter* createLetter(char c, int x, int y, Modifier modif)
+Letter* createLetter(char c, int x, int y, int row, int column, Modifier modif)
 {
     Letter* letter = malloc(sizeof(Letter));
     letter->modif = modif;
     letter->x = x;
     letter->y = y;
+    letter->row = row;
+    letter->column = column;
     letter->selected = 0;
 
     switch (c)

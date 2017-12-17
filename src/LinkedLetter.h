@@ -27,6 +27,8 @@ void listeInsertionEnd(Liste*, Letter*);
 
 void deleteFirstOfListe(Liste*);
 
+Liste* deleteLastOfListe(Liste*);
+
 void displayListe(Liste*);
 
 int sizeListe(Liste*);

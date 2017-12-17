@@ -28,7 +28,7 @@ void initGameManager(void)
         fatalError("Error during render creation", "SDL");
 
 
-FILE* dico = NULL;
+    FILE* dico = NULL;
     char word[TAILLE_MAX];
 
     //Ouverture du fichier dico
@@ -54,31 +54,20 @@ FILE* dico = NULL;
     }
 
 
-    //Vérification de présence du mot (Test)
-    if(searchNode(root, "jambon")){
-        SDL_Log("OUIIII");
-
-    }else{
-        SDL_Log("NOOON");
-    }
-
-
-    Word* w = initWord();
-
-    addLetterInWord(w, createLetter('j',5 ,5 , NONE));
-    addLetterInWord(w, createLetter('a',6 ,6 , NONE));
-
-    if(checkIfLetterIsPossible(root, w, createLetter('a', 7, 7, NONE))){
-        SDL_Log("Lettre possible");
-    }else{
-        SDL_Log("Lettre impossible");
-    }
-
 
 
 
 
     gameManager->interfaceR = createInterface();
+    TrieNode* wordInGrid = initNode();
+    wordInGrid = possibleWordInGrid(root);
+    SDL_Log("Mot de la grille charger");
+    if(searchNode(wordInGrid, "truc")){
+        SDL_Log("truc présent dans la grille !");
+    }else{
+        SDL_Log("truc pas présent dans la grille !");
+    }
+
 
 }
 

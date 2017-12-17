@@ -15,9 +15,9 @@ Grid* createGrid(void)
         for (column = 0; column < GRID_SIZE; column++)
         {
             grid->grid[row][column] = malloc(sizeof(Letter));
-            grid->grid[row][column] = createLetter( gridModel.grid[column][row].c,
+            grid->grid[row][column] = createLetter( gridModel.grid[row][column].c,
                                                     ((row * GRID_CELL_SIZE) + BEGIN_GRID_X + PIXELS_TO_CENTER_LETTER),
-                                                    ((column * GRID_CELL_SIZE) + BEGIN_GRID_Y + PIXELS_TO_CENTER_LETTER),
+                                                    ((column * GRID_CELL_SIZE) + BEGIN_GRID_Y + PIXELS_TO_CENTER_LETTER), column, row,
                                                     gridModel.grid[column][row].m);
         }
     }

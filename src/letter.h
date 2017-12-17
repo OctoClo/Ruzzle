@@ -20,10 +20,10 @@ typedef struct _letter
     Texture* bonus;
     int selected;
     Texture* selectedTile;
-    int x, y;
+    int x, y, row, column;
 } Letter;
 
-Letter* createLetter(char, int, int, Modifier);
+Letter* createLetter(char, int, int, int, int, Modifier);
 
 int scoreLetter(Letter*);
 void setSelectedLetter(Letter*, int);

@@ -1,11 +1,16 @@
 #include "Interface.h"
 #include "Dictionnary.h"
+
 Interface* createInterface(void)
 {
     Interface* interfaceR = malloc(sizeof(Interface));
 
+
     interfaceR->timer = createTimer();
     interfaceR->grid = createGrid();
+
+
+
     interfaceR->currentWord = createCurrentWord();
 
     return interfaceR;

@@ -1,5 +1,6 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
+#define TAILLE_MAX 100
 
 #include <SDL2/SDL.h>
 

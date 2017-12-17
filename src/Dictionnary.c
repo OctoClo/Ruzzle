@@ -90,27 +90,224 @@ bool checkIfLetterIsPossible(TrieNode* root, Word* word, Letter* letter){
 
 
 
-    return (currentNode != NULL && currentNode->children[indexLetter] != NULL);
+
+    return (currentNode != NULL && currentNode->children[indexLetter] != NULL && !letter->selected);
 
 }
 
-TrieNode* possibleWordInGrid(){
+TrieNode* possibleWordInGrid(TrieNode* root){
     Grid* currentGrid = gameManager->interfaceR->grid;
-    TrieNode* root = initNode();
+    TrieNode* rootNew = initNode();
+    Word* newWord = initWord();
     int row, column;
-    for(row=0; row<4;row++){
-        for(column=0;column<4; column++){
+    for(column=0; column<4;column++){
+        for(row=0;row<4; row++){
             if(currentGrid->grid[row][column] != NULL){
-
+                addLetterInWord(newWord, currentGrid->grid[row][column]);
+                checkWordInGrid(root, rootNew, newWord);
+                unSelectWord(newWord);
+                newWord = initWord();
             }
 
         }
     }
+
+    return rootNew;
 }
 
 
-Word* checkWordInGrid(Word* word){
+void checkWordInGrid(TrieNode* root, TrieNode* rootNew, Word* word){
     Letter* lastLetter = getLetter(word, sizeWord(word));
-    switch()
+    lastLetter->selected = 1;
+    Grid* currentGrid = gameManager->interfaceR->grid;
+    char* wordLisible = getWord(word);
+    if(searchNode(root, wordLisible)){
+        insertNode(rootNew, getWord(word));
+        SDL_Log("%s", wordLisible);
+    }
+    if(lastLetter->row<1 && lastLetter->column<1){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+    }else if(lastLetter->row<1 && (lastLetter->column>0 && lastLetter->column<(GRID_SIZE-1))){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+
+
+
+    }else if(lastLetter->row<1 && lastLetter->column==(GRID_SIZE-1)){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+    }else if((lastLetter->row>0 && lastLetter->row<(GRID_SIZE-1)) && lastLetter->column<1){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+    }else if(lastLetter->row==(GRID_SIZE-1) && lastLetter->column<1){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+
+    }else if((lastLetter->row>0 && lastLetter->row<(GRID_SIZE-1)) && (lastLetter->column>0 && lastLetter->column<(GRID_SIZE-1))){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+    }else if(lastLetter->row==(GRID_SIZE-1) && lastLetter->column==(GRID_SIZE-1)){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+    }else if(lastLetter->row==(GRID_SIZE-1) && lastLetter->column>0){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+    }else if(lastLetter->row>0 && lastLetter->column==(GRID_SIZE-1)){
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+            addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
+            checkWordInGrid(root, rootNew, word);
+        }
+    }
+
+
+    if(sizeWord(word)>1){
+       lastLetter->selected=0;
+       lastLetter = getLetter(word, sizeWord(word)-1);
+       deleteLastLetter(word);
+    }
+
+
+
 
 }

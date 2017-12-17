@@ -60,6 +60,24 @@ void deleteFirstOfListe(Liste* liste)
     }
 }
 
+Liste* deleteLastOfListe(Liste* liste){
+    LinkedLetter* temp = liste->first;
+    LinkedLetter* t;
+    if(liste->first->next == NULL){
+        free(liste->first);
+        liste->first == NULL;
+    }else{
+        while(temp->next != NULL){
+            t=temp;
+            temp=temp->next;
+        }
+        free(t->next);
+        t->next=NULL;
+    }
+    return liste;
+
+}
+
 void displayListe(Liste* liste)
 {
     LinkedLetter* current = liste->first;
