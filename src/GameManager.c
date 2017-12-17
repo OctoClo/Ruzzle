@@ -65,7 +65,7 @@ void initGameManager(void)
     if(searchNode(wordInGrid, "truc")){
         SDL_Log("truc présent dans la grille !");
     }else{
-        SDL_Log("truc pas présent dans la grille !");
+        SDL_Log("truc pas present dans la grille !");
     }
 
 
