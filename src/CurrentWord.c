@@ -25,7 +25,6 @@ void addLetter(CurrentWord* currentWord, Letter* letter)
 
 void finishWord(CurrentWord* currentWord)
 {
-    addWord(currentWord->word);
     currentWord->word = initWord();
 }
 

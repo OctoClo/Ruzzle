@@ -7,6 +7,7 @@ Interface* createInterface(void)
     interfaceR->timer = createTimer();
     interfaceR->grid = createGrid();
     interfaceR->currentWord = createCurrentWord();
+    interfaceR->score = createScore();
 
     return interfaceR;
 }
@@ -31,14 +32,20 @@ void handleAddLetter(Interface* interfaceR, Letter* letter)
 
 void handleFinishWord(Interface* interfaceR)
 {
-    finishWord(interfaceR->currentWord);
-    unselectAllLetters(interfaceR->grid);
+    if ( !isEmptyWord(interfaceR->currentWord->word))
+    {
+        addWord(interfaceR->currentWord->word);
+        addWordToScore(interfaceR->score, interfaceR->currentWord->word);
+        finishWord(interfaceR->currentWord);
+        unselectAllLetters(interfaceR->grid);
+    }
 }
 
 void updateInterface(Interface* interfaceR)
 {
     updateTimer(interfaceR->timer);
     updateCurrentWord(interfaceR->currentWord);
+    updateScore(interfaceR->score);
 }
 
 void renderInterface(Interface* interfaceR, SDL_Renderer* renderer)
@@ -46,6 +53,7 @@ void renderInterface(Interface* interfaceR, SDL_Renderer* renderer)
     renderTimer(interfaceR->timer, renderer);
     renderGrid(interfaceR->grid, renderer);
     renderCurrentWord(interfaceR->currentWord, renderer);
+    renderScore(interfaceR->score, renderer);
 }
 
 void freeInterface(Interface* interfaceR)
@@ -53,6 +61,7 @@ void freeInterface(Interface* interfaceR)
     freeCurrentWord(interfaceR->currentWord);
     freeGrid(interfaceR->grid);
     freeTimer(interfaceR->timer);
+    freeScore(interfaceR->score);
 
     free(interfaceR);
     interfaceR = NULL;

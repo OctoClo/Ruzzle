@@ -6,6 +6,7 @@
 #include "Grid.h"
 #include "Timer.h"
 #include "CurrentWord.h"
+#include "Score.h"
 #include "Letter.h"
 
 typedef struct _interface
@@ -13,6 +14,7 @@ typedef struct _interface
     Grid* grid;
     Timer* timer;
     CurrentWord* currentWord;
+    Score* score;
 } Interface;
 
 Interface* createInterface(void);
