@@ -1,24 +1,23 @@
 #include "Grid.h"
 
-Grid* createGrid(GameManager* gameManager)
+Grid* createGrid(void)
 {
     Grid* grid = malloc(sizeof(Grid));
 
     GridModel gridModel = createGridModel();
 
-    grid->grid = (Letter***) malloc(GRID_SIZE * sizeof(Letter**));
+    grid->grid = malloc(GRID_SIZE * sizeof(Letter**));
 
     int row, column;
     for (row = 0; row < GRID_SIZE; row++)
     {
-        grid->grid[row] = (Letter**) malloc(GRID_SIZE * sizeof(Letter*));
+        grid->grid[row] = malloc(GRID_SIZE * sizeof(Letter*));
         for (column = 0; column < GRID_SIZE; column++)
         {
-            grid->grid[row][column] = (Letter*) malloc(sizeof(Letter));
-            grid->grid[row][column] = createLetter( gameManager,
-                                                    gridModel.grid[column][row].c,
+            grid->grid[row][column] = malloc(sizeof(Letter));
+            grid->grid[row][column] = createLetter( gridModel.grid[row][column].c,
                                                     ((row * GRID_CELL_SIZE) + BEGIN_GRID_X + PIXELS_TO_CENTER_LETTER),
-                                                    ((column * GRID_CELL_SIZE) + BEGIN_GRID_Y + PIXELS_TO_CENTER_LETTER),
+                                                    ((column * GRID_CELL_SIZE) + BEGIN_GRID_Y + PIXELS_TO_CENTER_LETTER), column, row,
                                                     gridModel.grid[column][row].m);
         }
     }
@@ -68,10 +67,9 @@ void freeGrid(Grid* grid)
     for (row = 0; row < GRID_SIZE; row++)
     {
         for (column = 0; column < GRID_SIZE; column++)
-        {
             freeLetter(grid->grid[row][column]);
-            free(grid->grid[row][column]);
-        }
     }
     free(grid->grid);
+    free(grid);
+    grid = NULL;
 }

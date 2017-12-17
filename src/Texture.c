@@ -4,8 +4,7 @@ SDL_bool createImageTexture(Texture* texture, char* imagePath, SDL_Renderer* ren
 {
     SDL_bool success = SDL_TRUE;
 
-	SDL_Surface* imageSurface = malloc(sizeof(SDL_Surface));
-	imageSurface = IMG_Load(imagePath);
+	SDL_Surface* imageSurface = IMG_Load(imagePath);
 
 	if (imageSurface == NULL)
 		success = SDL_FALSE;
@@ -24,7 +23,6 @@ SDL_bool createImageTexture(Texture* texture, char* imagePath, SDL_Renderer* ren
         }
 
         SDL_FreeSurface(imageSurface);
-        free(imageSurface);
     }
 
 	return success;
@@ -34,8 +32,7 @@ SDL_bool createTextTexture(Texture* texture, char* textureText, SDL_Color* textC
 {
     SDL_bool success = SDL_TRUE;
 
-	SDL_Surface* textSurface = malloc(sizeof(SDL_Surface));
-	textSurface = TTF_RenderText_Solid(font, textureText, *textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Solid(font, textureText, *textColor);
 
 	if (textSurface == NULL)
         success = SDL_FALSE;
@@ -51,7 +48,6 @@ SDL_bool createTextTexture(Texture* texture, char* textureText, SDL_Color* textC
         }
 
         SDL_FreeSurface(textSurface);
-        free(textSurface);
     }
 
 	return success;
@@ -66,15 +62,14 @@ void renderTexture(Texture* texture, int x, int y, SDL_Renderer* renderer)
 	renderRect->h = texture->height;
 
 	SDL_RenderCopyEx(renderer, texture->texture, NULL, renderRect, 0.0, NULL, SDL_FLIP_NONE);
-	free(renderRect);
 }
 
 void freeTexture(Texture* texture)
 {
     if (texture->texture != NULL)
-	{
-		SDL_DestroyTexture(texture->texture);
-		free(texture->texture);
-	}
+        SDL_DestroyTexture(texture->texture);
+
+    free(texture);
+    texture = NULL;
 }
 

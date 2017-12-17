@@ -8,32 +8,32 @@
 
 #include "Letter.h"
 
-typedef struct LinkedLetter LinkedLetter;
-
-struct LinkedLetter
+typedef struct _linkedLetter
 {
-    struct Letter* lett;
-    LinkedLetter* next;
-};
+    Letter* lett;
+    struct _linkedLetter* next;
+} LinkedLetter;
 
-typedef struct Liste
+typedef struct _liste
 {
     LinkedLetter* first;
 } Liste;
 
 Liste* listeInitialisation();
 
-void listeInsertionBeginning(Liste*, struct Letter*);
+void listeInsertionBeginning(Liste*, Letter*);
 
-void listeInsertionEnd(Liste*, struct Letter*);
+void listeInsertionEnd(Liste*, Letter*);
 
 void deleteFirstOfListe(Liste*);
+
+Liste* deleteLastOfListe(Liste*);
 
 void displayListe(Liste*);
 
 int sizeListe(Liste*);
 
-struct Letter* getLetterAtRank(Liste*, int);
+Letter* getLetterAtRank(Liste*, int);
 
 
 #endif // LINKEDLETTER_H_INCLUDED

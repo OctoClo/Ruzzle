@@ -7,7 +7,7 @@ Word* initWord(void)
     return w;
 }
 
-void addLetterInWord(Word* w, struct Letter* l)
+void addLetterInWord(Word* w, Letter* l)
 {
     listeInsertionEnd(w->word, l);
 }
@@ -20,6 +20,9 @@ void displayWord(Word* w)
 char* getWord(Word* w)
 {
     int word_size = sizeWord(w);
+    if (getLetter(w, 1) == NULL)
+        return "";
+
     char* word = malloc(sizeof(*word)*word_size);
     int i;
     for(i = 0 ; i < word_size ; i++)
@@ -27,6 +30,10 @@ char* getWord(Word* w)
     word[i] = '\0';
 
     return word;
+}
+
+void deleteLastLetter(Word* w){
+    w=deleteLastOfListe(w->word);
 }
 
 int scoreWord(Word* w)
@@ -69,13 +76,28 @@ int sizeWord(Word* w)
     return sizeWord;
 }
 
-Letter* getLetter(Word* w,int rank)
+int isEmptyWord(Word* w)
 {
+    return ((getLetter(w, 1) == NULL) ? 1 : 0);
+}
+
+void unSelectWord(Word* w){
+    int i;
+    Letter* toUnselect;
+    for(i=1;i<=sizeWord(w);i++){
+        toUnselect = getLetter(w, i);
+        toUnselect->selected=0;
+        if(toUnselect->selected){
+            SDL_Log("PB k");
+        }
+    }
+}
+
+Letter* getLetter(Word* w, int rank)
+{
+
     if (rank <= sizeWord(w) && rank > 0)
         return getLetterAtRank(w->word, rank);
     else
-    {
-        printf("Erreur : le rang doit exister dans le mot");
-        exit(EXIT_FAILURE);
-    }
+        fatalError("Trying to access invalid rank letter in word !", "");
 }

@@ -7,13 +7,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "Enums.h"
 #include "Texture.h"
 #include "GameManager.h"
-#include "Enums.h"
 
-typedef struct Letter Letter;
-
-struct Letter
+typedef struct _letter
 {
     char character;
     int weight;
@@ -22,16 +20,15 @@ struct Letter
     Texture* bonus;
     int selected;
     Texture* selectedTile;
-    int x, y;
-};
+    int x, y, row, column;
+} Letter;
 
-Letter* createLetter(struct GameManager*, char, int, int, Modifier);
+Letter* createLetter(char, int, int, int, int, Modifier);
 
 int scoreLetter(Letter*);
 void setSelectedLetter(Letter*, int);
 void renderLetter(Letter*, SDL_Renderer*);
 
 void freeLetter(Letter*);
-
 
 #endif // LETTER_H_INCLUDED

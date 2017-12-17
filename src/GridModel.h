@@ -2,15 +2,15 @@
 #define GRID_MODEL_H
 
 #include "Utils.h"
-#include "Letter.h"
+#include "Enums.h"
 
-typedef struct
+typedef struct _pairGrid
 {
     char c;
     Modifier m;
 } PairGrid;
 
-typedef struct
+typedef struct _gridModel
 {
     PairGrid grid[GRID_SIZE][GRID_SIZE];
 } GridModel;

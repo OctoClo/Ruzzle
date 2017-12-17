@@ -8,24 +8,26 @@
 #include <stdlib.h>
 #include <windows.h>
 
+#include "Utils.h"
 #include "Texture.h"
 #include "GameManager.h"
 
-typedef struct Timer Timer;
-struct Timer
+typedef struct _timer
 {
-    Texture* timerTexture;
-    TTF_Font* timerFont;
-    SDL_Color timerColor;
-    char timerText[20];
+    Texture* texture;
+    TTF_Font* font;
+    SDL_Color color;
+    int x, y;
+    char text[20];
+
     int time;
     int currentTime;
     int startTime;
-};
+} Timer;
 
-Timer* createTimer(GameManager*);
+Timer* createTimer(void);
 
-void updateTimer(Timer*, GameManager*);
+void updateTimer(Timer*);
 void renderTimer(Timer*, SDL_Renderer*);
 
 void freeTimer(Timer*);
