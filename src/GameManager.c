@@ -26,6 +26,7 @@ void initGameManager(void)
 
     gameManager->interfaceR = createInterface(gameManager);
     gameManager->wordsCount = 0;
+    gameManager->words = NULL;
 }
 
 void initSDL(void)
@@ -54,6 +55,16 @@ void gameLoop(void)
         update();
         render();
     }
+}
+
+void addWord(Word* word)
+{
+    gameManager->wordsCount++;
+    Word** newWords = realloc(gameManager->words, (gameManager->wordsCount * sizeof(Word*)));
+    newWords[gameManager->wordsCount - 1] = malloc(sizeof(Word));
+    if (newWords != NULL)
+        gameManager->words = newWords;
+    gameManager->words[gameManager->wordsCount - 1] = word;
 }
 
 void handleEvents(SDL_Event* e)
@@ -101,12 +112,23 @@ void freeGameManager(void)
 {
     freeInterface(gameManager->interfaceR);
 
+    int i;
+    for (i = 0 ; i < gameManager->wordsCount ; i++)
+    {
+        //freeWord(gameManager->words[i]);
+        free(gameManager->words[i]); // TODO inside of freeWord()
+    }
+    free(gameManager->words);
+    gameManager->words = NULL;
+
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
         SDL_DestroyRenderer(gameManager->renderer);
+    gameManager->renderer = NULL;
 
     if (gameManager->window != NULL)
         SDL_DestroyWindow(gameManager->window);
+    gameManager->window = NULL;
 
     free(gameManager);
     gameManager = NULL;

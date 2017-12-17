@@ -25,14 +25,12 @@ void handleClick(Interface* interfaceR, SDL_Event* e)
 
 void handleAddLetter(Interface* interfaceR, Letter* letter)
 {
-    SDL_Log("Letter added !");
     addLetter(interfaceR->currentWord, letter);
     setSelectedLetter(letter, 1);
 }
 
 void handleFinishWord(Interface* interfaceR)
 {
-    SDL_Log("Word finished !");
     finishWord(interfaceR->currentWord);
     unselectAllLetters(interfaceR->grid);
 }
@@ -55,6 +53,7 @@ void freeInterface(Interface* interfaceR)
     freeCurrentWord(interfaceR->currentWord);
     freeGrid(interfaceR->grid);
     freeTimer(interfaceR->timer);
+
     free(interfaceR);
     interfaceR = NULL;
 }

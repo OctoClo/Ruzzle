@@ -21,12 +21,11 @@ CurrentWord* createCurrentWord(void)
 void addLetter(CurrentWord* currentWord, Letter* letter)
 {
     addLetterInWord(currentWord->word, letter);
-    displayWord(currentWord->word);
 }
 
 void finishWord(CurrentWord* currentWord)
 {
-    gameManager->wordsCount++;
+    addWord(currentWord->word);
     currentWord->word = initWord();
 }
 

@@ -8,6 +8,9 @@
 #include "Letter.h"
 #include "LinkedLetter.h"
 
+typedef struct _letter Letter;
+typedef struct _liste Liste;
+
 typedef struct _word
 {
     Liste* word;

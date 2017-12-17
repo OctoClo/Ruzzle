@@ -12,8 +12,10 @@
 
 #include "Utils.h"
 #include "Enums.h"
+#include "Word.h"
 
 typedef struct _interface Interface;
+typedef struct _word Word;
 
 typedef struct _gameManager
 {
@@ -21,6 +23,7 @@ typedef struct _gameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     Interface* interfaceR;
+    Word** words;
     int wordsCount;
 } GameManager;
 
@@ -29,6 +32,8 @@ GameManager* gameManager;
 void initGameManager(void);
 void initSDL(void);
 void gameLoop(void);
+
+void addWord(Word*);
 
 void handleEvents(SDL_Event*);
 void update(void);
