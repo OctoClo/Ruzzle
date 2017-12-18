@@ -80,7 +80,7 @@ bool isValidLetterDictionary(TrieNode* root, Word* word, Letter* letter)
 
 TrieNode* possibleWordInGrid(TrieNode* root)
 {
-    Grid* currentGrid = gameManager->interfaceR->grid;
+    Grid* currentGrid = gameManager->interfaceGame->grid;
     TrieNode* rootNew = initNode();
     Word* newWord = initWord();
 
@@ -106,7 +106,7 @@ void checkWordInGrid(TrieNode* root, TrieNode* rootNew, Word* word)
 {
     Letter* lastLetter = getLetter(word, sizeWord(word));
     lastLetter->selected = 1;
-    Grid* currentGrid = gameManager->interfaceR->grid;
+    Grid* currentGrid = gameManager->interfaceGame->grid;
     char* wordLisible = getWord(word);
 
     if (searchNode(root, wordLisible))

@@ -10,7 +10,7 @@
 #include "GridModel.h"
 #include "Word.h"
 #include "Letter.h"
-#include "Interface.h"
+#include "InterfaceGame.h"
 
 typedef struct _trieNode
 {

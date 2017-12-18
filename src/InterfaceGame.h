@@ -17,7 +17,7 @@ typedef struct _currentWord CurrentWord;
 typedef struct _grid Grid;
 typedef struct _button Button;
 
-typedef struct _interface
+typedef struct _interfaceGame
 {
     Timer* timer;
     Score* score;
@@ -27,19 +27,19 @@ typedef struct _interface
 
     Button* buttonEnd;
     Button* buttonQuit;
-} Interface;
+} InterfaceGame;
 
-Interface* createInterface(void);
+InterfaceGame* createInterfaceGame(void);
 
-void handleClick(Interface*, SDL_Event*);
-void handleAddLetter(Interface*, Letter*);
-int isValidLetter(Interface*, Letter*);
-void handleFinishWord(Interface*);
-int isValidWord(Interface*, Word*);
+void handleClick(InterfaceGame*, SDL_Event*);
+void handleAddLetter(InterfaceGame*, Letter*);
+int isValidLetter(InterfaceGame*, Letter*);
+void handleFinishWord(InterfaceGame*);
+int isValidWord(InterfaceGame*, Word*);
 
-void updateInterface(Interface*);
-void renderInterface(Interface*, SDL_Renderer*);
+void updateInterfaceGame(InterfaceGame*);
+void renderInterfaceGame(InterfaceGame*, SDL_Renderer*);
 
-void freeInterface(Interface*);
+void freeInterfaceGame(InterfaceGame*);
 
 #endif // INTERFACE_H

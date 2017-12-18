@@ -16,7 +16,7 @@
 #include "Word.h"
 
 typedef struct _trieNode TrieNode;
-typedef struct _interface Interface;
+typedef struct _interfaceGame InterfaceGame;
 typedef struct _word Word;
 
 typedef struct _gameManager
@@ -27,7 +27,7 @@ typedef struct _gameManager
 
     TrieNode* dictionary;
 
-    Interface* interfaceR;
+    InterfaceGame* interfaceGame;
     Word** words;
     int wordsCount;
 } GameManager;

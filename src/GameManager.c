@@ -50,7 +50,7 @@ void initGameManager(void)
     if (!gameManager->renderer)
         fatalError("Error during render creation", "SDL");
 
-    gameManager->interfaceR = createInterface();
+    gameManager->interfaceGame = createInterfaceGame();
     gameManager->wordsCount = 0;
     gameManager->words = NULL;
 
@@ -113,13 +113,13 @@ void handleEvents(SDL_Event* e)
 
     // Handle mouse inputs
     else if (e->type == SDL_MOUSEBUTTONDOWN)
-        handleClick(gameManager->interfaceR, e);
+        handleClick(gameManager->interfaceGame, e);
 }
 
 void update(void)
 {
     // Update things
-    updateInterface(gameManager->interfaceR);
+    updateInterfaceGame(gameManager->interfaceGame);
 }
 
 void render(void)
@@ -129,7 +129,7 @@ void render(void)
     SDL_RenderClear(gameManager->renderer);
 
     // Render things
-    renderInterface(gameManager->interfaceR, gameManager->renderer);
+    renderInterfaceGame(gameManager->interfaceGame, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
 }
@@ -146,7 +146,7 @@ void cleanExit(void)
 
 void freeGameManager(void)
 {
-    freeInterface(gameManager->interfaceR);
+    freeInterfaceGame(gameManager->interfaceGame);
 
     int i;
     for (i = 0 ; i < gameManager->wordsCount ; i++)
