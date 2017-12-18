@@ -1,5 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define WINDOW_HEIGHT 700
 #define WINDOW_WIDTH 500
@@ -17,5 +20,8 @@
 #define ALPHABET_SIZE 26
 #define CHAR_TO_INDEX(c) ((int)c - (int) 'a')
 #define MAX_NB_WORDS 100
+
+int randInter(int, int);
+char randLetter();
 
 #endif // UTILS_H
