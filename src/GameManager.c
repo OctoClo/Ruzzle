@@ -13,6 +13,27 @@ void initSDL(void)
 		fatalError("Error during SDL_image initialization", "IMG");
 }
 
+void readRootDictionary(void)
+{
+    FILE* dictionary = NULL;
+    char words[MAX_NB_WORDS];
+
+    dictionary = fopen("src/file/dico.txt", "r");
+    rootDictionary = initNode();
+
+    if (dictionary != NULL)
+    {
+        while(fgets(words, MAX_NB_WORDS, dictionary) != NULL)
+        {
+            strtok(words, "\n");
+            insertNode(rootDictionary, words);
+        }
+        fclose(dictionary);
+    }
+    else
+        fatalError("Error during root dictionary reading", "");
+}
+
 void initGameManager(void)
 {
     gameManager = malloc(sizeof(GameManager));
@@ -35,41 +56,8 @@ void initGameManager(void)
     gameManager->wordsCount = 0;
     gameManager->words = NULL;
 
-
-
-    FILE* dico = NULL;
-    char word[MAX_NB_WORDS];
-
-    //Ouverture du fichier dico
-    dico = fopen("src/file/dico.txt", "r");
-
-    //D�claration de l'arbre pr�fix�
-    TrieNode* root = initNode();
-
-
-    //Traitement du fichier dico
-    if(dico != NULL){
-
-
-        //Enregistrement des mots du dictionnaire dans l'arbre pr�fix�e
-        while(fgets(word, MAX_NB_WORDS, dico) != NULL){
-            strtok(word, "\n");
-            insertNode(root, word);
-        }
-
-
-        SDL_Log("Dico charger");
-        fclose(dico);
-    }
-
-    TrieNode* wordInGrid = initNode();
-    wordInGrid = possibleWordInGrid(root);
-    SDL_Log("Mot de la grille charger");
-    if(searchNode(wordInGrid, "truc")){
-        SDL_Log("truc present dans la grille !");
-    }else{
-        SDL_Log("truc pas present dans la grille !");
-    }
+    gameManager->dictionary = initNode();
+    gameManager->dictionary = possibleWordInGrid(rootDictionary);
 }
 
 void gameLoop(void)
@@ -131,8 +119,6 @@ void render(void)
     renderInterface(gameManager->interfaceR, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
-
-
 }
 
 void cleanExit(void)
@@ -185,7 +171,8 @@ void fatalError(const char* error, const char* library)
     else if (strcmp(library, "IMG") == 0)
         SDL_Log(IMG_GetError());
 
-    freeGameManager();
+    if (gameManager != NULL)
+        freeGameManager();
     exit(EXIT_FAILURE);
 }
 

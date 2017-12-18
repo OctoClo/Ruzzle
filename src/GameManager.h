@@ -15,14 +15,18 @@
 #include "Dictionnary.h"
 #include "Word.h"
 
+typedef struct _trieNode TrieNode;
 typedef struct _interface Interface;
 typedef struct _word Word;
 
 typedef struct _gameManager
 {
-    Step step;
     SDL_Window* window;
     SDL_Renderer* renderer;
+    Step step;
+
+    TrieNode* dictionary;
+
     Interface* interfaceR;
     Word** words;
     int wordsCount;
@@ -31,6 +35,8 @@ typedef struct _gameManager
 GameManager* gameManager;
 
 void initSDL(void);
+void readRootDictionary(void);
+
 void initGameManager(void);
 void gameLoop(void);
 

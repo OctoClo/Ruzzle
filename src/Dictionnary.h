@@ -12,13 +12,13 @@
 #include "Letter.h"
 #include "Interface.h"
 
-typedef struct _trieNode TrieNode;
-
 typedef struct _trieNode
 {
-    TrieNode* children[ALPHABET_SIZE];
+    struct _trieNode* children[ALPHABET_SIZE];
     bool endOfWord;
 } TrieNode;
+
+TrieNode* rootDictionary;
 
 TrieNode* initNode(void);
 void insertNode(TrieNode*, const char*);

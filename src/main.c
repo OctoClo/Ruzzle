@@ -8,8 +8,12 @@ int main(int argc, char** argv)
     // Declare which function to call on program exit
     atexit(cleanExit);
 
-    // Initialize SDL and launch game manager
+    // Initialize SDL and read complete dictionnary
     initSDL();
+    readRootDictionary();
+
+    // Launch game loop
+    gameManager = NULL;
     initGameManager();
     gameLoop();
 
