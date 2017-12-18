@@ -17,6 +17,7 @@ typedef struct _grid
 
 Grid* createGrid(void);
 
+int isValidLetterGrid(Grid*, Letter*, Letter*);
 Letter* getLetterCoord(Grid*, int, int);
 void unselectAllLetters(Grid*);
 

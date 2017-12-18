@@ -25,6 +25,18 @@ Grid* createGrid(void)
     return grid;
 }
 
+int isValidLetterGrid(Grid* grid, Letter* lastLetter, Letter* newLetter)
+{
+    if (! newLetter->selected)
+    {
+        int rowDiff = max(newLetter->row, lastLetter->row) - min(newLetter->row, lastLetter->row);
+        int columnDiff = max(newLetter->column, lastLetter->column) - min(newLetter->column, lastLetter->column);
+
+        return (rowDiff <= 1 && columnDiff <= 1) ? 1 : 0;
+    }
+    return 0;
+}
+
 Letter* getLetterCoord(Grid* grid, int x, int y)
 {
     int newX = x - BEGIN_GRID_X, newY = y - BEGIN_GRID_Y;

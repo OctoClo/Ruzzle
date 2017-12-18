@@ -34,8 +34,18 @@ void handleClick(Interface* interfaceR, SDL_Event* e)
 
 void handleAddLetter(Interface* interfaceR, Letter* letter)
 {
+    if ( !isEmptyWord(interfaceR->currentWord->word) && !isValidLetter(interfaceR, letter))
+        return;
+
     addLetter(interfaceR->currentWord, letter);
     setSelectedLetter(letter, 1);
+}
+
+int isValidLetter(Interface* interfaceR, Letter* letter)
+{
+    return (isValidLetterGrid(interfaceR->grid,
+                              getLetter(interfaceR->currentWord->word, sizeWord(interfaceR->currentWord->word)),
+                              letter) == 1) ? 1 : 0;
 }
 
 void handleFinishWord(Interface* interfaceR)

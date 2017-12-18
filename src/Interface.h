@@ -9,6 +9,7 @@
 #include "Score.h"
 #include "Button.h"
 #include "Letter.h"
+#include "Dictionnary.h"
 
 typedef struct _timer Timer;
 typedef struct _score Score;
@@ -32,6 +33,7 @@ Interface* createInterface(void);
 
 void handleClick(Interface*, SDL_Event*);
 void handleAddLetter(Interface*, Letter*);
+int isValidLetter(Interface*, Letter*);
 void handleFinishWord(Interface*);
 
 void updateInterface(Interface*);
