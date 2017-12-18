@@ -50,13 +50,18 @@ int isValidLetter(Interface* interfaceR, Letter* letter)
 
 void handleFinishWord(Interface* interfaceR)
 {
-    if ( !isEmptyWord(interfaceR->currentWord->word))
+    if ( !isEmptyWord(interfaceR->currentWord->word) && isValidWord(interfaceR, interfaceR->currentWord->word))
     {
         addWord(interfaceR->currentWord->word);
         addWordToScore(interfaceR->score, interfaceR->currentWord->word);
-        finishWord(interfaceR->currentWord);
-        unselectAllLetters(interfaceR->grid);
     }
+    finishWord(interfaceR->currentWord);
+    unselectAllLetters(interfaceR->grid);
+}
+
+int isValidWord(Interface* interfaceR, Word* word)
+{
+    return (!isWordAlreadyFound(word) && searchNode(gameManager->dictionary, getWord(word))) ? 1 : 0;
 }
 
 void updateInterface(Interface* interfaceR)

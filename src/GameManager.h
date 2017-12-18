@@ -41,6 +41,7 @@ void initGameManager(void);
 void gameLoop(void);
 
 void addWord(Word*);
+int isWordAlreadyFound(Word*);
 
 void handleEvents(SDL_Event*);
 void update(void);

@@ -39,8 +39,6 @@ void initGameManager(void)
     gameManager = malloc(sizeof(GameManager));
 
     // Initialize struct values
-    gameManager->window = malloc(sizeof(gameManager->window));
-    gameManager->renderer = malloc(sizeof(gameManager->renderer));
     gameManager->step = GAME;
 
     // Create game window and renderer
@@ -88,6 +86,21 @@ void addWord(Word* word)
     if (newWords != NULL)
         gameManager->words = newWords;
     gameManager->words[gameManager->wordsCount - 1] = word;
+}
+
+int isWordAlreadyFound(Word* word)
+{
+    if (gameManager->wordsCount > 0)
+    {
+        int i;
+        for (i = 0 ; i < gameManager->wordsCount ; i++)
+        {
+            if (strcmp(getWord(gameManager->words[i]), getWord(word)) == 0)
+                return 1;
+        }
+    }
+
+    return 0;
 }
 
 void handleEvents(SDL_Event* e)

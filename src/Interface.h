@@ -35,6 +35,7 @@ void handleClick(Interface*, SDL_Event*);
 void handleAddLetter(Interface*, Letter*);
 int isValidLetter(Interface*, Letter*);
 void handleFinishWord(Interface*);
+int isValidWord(Interface*, Word*);
 
 void updateInterface(Interface*);
 void renderInterface(Interface*, SDL_Renderer*);

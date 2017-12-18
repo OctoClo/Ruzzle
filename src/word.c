@@ -82,21 +82,19 @@ int isEmptyWord(Word* w)
     return ((getLetter(w, 1) == NULL) ? 1 : 0);
 }
 
-void unSelectWord(Word* w){
+void unSelectWord(Word* w)
+{
     int i;
     Letter* toUnselect;
-    for(i=1;i<=sizeWord(w);i++){
+    for(i = 1 ; i <= sizeWord(w) ; i++)
+    {
         toUnselect = getLetter(w, i);
         toUnselect->selected=0;
-        if(toUnselect->selected){
-            SDL_Log("PB k");
-        }
     }
 }
 
 Letter* getLetter(Word* w, int rank)
 {
-
     if (rank <= sizeWord(w) && rank > 0)
         return getLetterAtRank(w->word, rank);
     else

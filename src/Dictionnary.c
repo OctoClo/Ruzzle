@@ -112,7 +112,6 @@ void checkWordInGrid(TrieNode* root, TrieNode* rootNew, Word* word)
     if (searchNode(root, wordLisible))
     {
         insertNode(rootNew, getWord(word));
-        SDL_Log("%s", wordLisible);
     }
 
     if(lastLetter->row<1 && lastLetter->column<1){
