@@ -63,7 +63,7 @@ void initGameManager(void)
     wordInGrid = possibleWordInGrid(root);
     SDL_Log("Mot de la grille charger");
     if(searchNode(wordInGrid, "truc")){
-        SDL_Log("truc présent dans la grille !");
+        SDL_Log("truc present dans la grille !");
     }else{
         SDL_Log("truc pas present dans la grille !");
     }
