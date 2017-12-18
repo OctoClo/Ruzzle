@@ -16,6 +16,5 @@ typedef struct _gridModel
 } GridModel;
 
 GridModel createGridModel();
-GridModel generateGrid(int);
 
 #endif // GRID_MODEL_H

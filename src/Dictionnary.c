@@ -78,6 +78,10 @@ bool checkIfLetterIsPossible(TrieNode* root, Word* word, Letter* letter)
     return (currentNode != NULL && currentNode->children[indexLetter] != NULL && !letter->selected);
 }
 
+void freeDictionnary(TrieNode* root){
+    free(root);
+}
+
 TrieNode* possibleWordInGrid(TrieNode* root)
 {
     Grid* currentGrid = gameManager->interfaceR->grid;
@@ -112,7 +116,6 @@ void checkWordInGrid(TrieNode* root, TrieNode* rootNew, Word* word)
     if (searchNode(root, wordLisible))
     {
         insertNode(rootNew, getWord(word));
-        SDL_Log("%s", wordLisible);
     }
 
     if(lastLetter->row<1 && lastLetter->column<1){

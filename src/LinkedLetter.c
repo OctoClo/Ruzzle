@@ -13,6 +13,11 @@ Liste* listeInitialisation()
     return liste;
 }
 
+void freeListe(Liste* liste){
+    liste->first = NULL;
+    free(liste);
+}
+
 void listeInsertionBeginning(Liste* liste, Letter* l)
 {
     LinkedLetter* newLink = malloc(sizeof(*newLink));
@@ -26,6 +31,8 @@ void listeInsertionBeginning(Liste* liste, Letter* l)
 
     liste->first = newLink;
 }
+
+
 
 void listeInsertionEnd(Liste* liste, Letter* l)
 {
@@ -60,6 +67,12 @@ void deleteFirstOfListe(Liste* liste)
     }
 }
 
+void freeLinkedLetter(LinkedLetter* linkedLet){
+    linkedLet->next = NULL;
+    linkedLet->lett = NULL;
+    free(linkedLet);
+}
+
 Liste* deleteLastOfListe(Liste* liste)
 {
     LinkedLetter* temp = liste->first;
@@ -68,7 +81,7 @@ Liste* deleteLastOfListe(Liste* liste)
     if (liste->first->next == NULL)
     {
         free(liste->first);
-        liste->first == NULL;
+
     }
     else
     {

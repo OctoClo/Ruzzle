@@ -20,14 +20,4 @@ GridModel createGridModel()
 }
 
 
-GridModel generateGrid(int size){
-    GridModel grid[size][size];
-    srand(time(NULL));
-    int row, column;
-    for(row=0; row<size; row++){
-        for(column=0; column<size; column++){
-            grid[row][column] =
-        }
-    }
 
-}

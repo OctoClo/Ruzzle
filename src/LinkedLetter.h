@@ -16,6 +16,8 @@ typedef struct _linkedLetter
     struct _linkedLetter* next;
 } LinkedLetter;
 
+
+
 typedef struct _liste
 {
     LinkedLetter* first;
@@ -33,9 +35,12 @@ Liste* deleteLastOfListe(Liste*);
 
 void displayListe(Liste*);
 
+void freeLinkedLetter(LinkedLetter*);
+
 int sizeListe(Liste*);
 
 Letter* getLetterAtRank(Liste*, int);
+void freeListe(Liste*);
 
 
 #endif // LINKEDLETTER_H_INCLUDED

@@ -20,6 +20,7 @@ Grid* createGrid(void);
 Letter* getLetterCoord(Grid*, int, int);
 void unselectAllLetters(Grid*);
 
+void generateGrid(int);
 void renderGrid(Grid*, SDL_Renderer*);
 
 void freeGrid(Grid*);
