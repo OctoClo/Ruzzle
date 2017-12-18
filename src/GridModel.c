@@ -1,4 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "GridModel.h"
+
 
 GridModel createGridModel()
 {
@@ -13,4 +17,17 @@ GridModel createGridModel()
     };
 
     return grid;
+}
+
+
+GridModel generateGrid(int size){
+    GridModel grid[size][size];
+    srand(time(NULL));
+    int row, column;
+    for(row=0; row<size; row++){
+        for(column=0; column<size; column++){
+            grid[row][column] =
+        }
+    }
+
 }
