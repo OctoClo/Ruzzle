@@ -14,4 +14,8 @@
 
 #define FONT_PATH "./resources/fonts/Symtext.ttf"
 
+#define ALPHABET_SIZE 26
+#define CHAR_TO_INDEX(c) ((int)c - (int) 'a')
+#define MAX_NB_WORDS 100
+
 #endif // UTILS_H

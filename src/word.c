@@ -32,8 +32,9 @@ char* getWord(Word* w)
     return word;
 }
 
-void deleteLastLetter(Word* w){
-    w=deleteLastOfListe(w->word);
+void deleteLastLetter(Word* w)
+{
+    w->word = deleteLastOfListe(w->word);
 }
 
 int scoreWord(Word* w)

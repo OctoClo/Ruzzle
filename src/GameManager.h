@@ -1,6 +1,5 @@
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
-#define TAILLE_MAX 100
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>

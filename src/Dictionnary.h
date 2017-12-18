@@ -1,5 +1,4 @@
 #ifndef DICTIONNARY_H_INCLUDED
-
 #define DICTIONNARY_H_INCLUDED
 
 #include <stdio.h>
@@ -7,26 +6,19 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "Utils.h"
 #include "GridModel.h"
-
 #include "Word.h"
 #include "Letter.h"
 #include "Interface.h"
 
-#define ALPHABET_SIZE (26)
+typedef struct _trieNode TrieNode;
 
-#define CHAR_TO_INDEX(c) ((int)c - (int) 'a')
-
-
-
-typedef struct TrieNode TrieNode;
-
-struct TrieNode{
+typedef struct _trieNode
+{
     TrieNode* children[ALPHABET_SIZE];
-
     bool endOfWord;
-
-};
+} TrieNode;
 
 TrieNode* initNode(void);
 void insertNode(TrieNode*, const char*);
@@ -36,11 +28,5 @@ bool checkIfLetterIsPossible(TrieNode*, Word*, Letter*);
 
 TrieNode* possibleWordInGrid(TrieNode*);
 void checkWordInGrid(TrieNode*, TrieNode*, Word*);
-
-
-
-
-
-
 
 #endif // DICTIONNARY_H_INCLUDED

@@ -8,6 +8,8 @@
 #include "GridModel.h"
 #include "Letter.h"
 
+typedef struct _letter Letter;
+
 typedef struct _grid
 {
     Letter*** grid;

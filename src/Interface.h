@@ -10,6 +10,12 @@
 #include "Button.h"
 #include "Letter.h"
 
+typedef struct _timer Timer;
+typedef struct _score Score;
+typedef struct _currentWord CurrentWord;
+typedef struct _grid Grid;
+typedef struct _button Button;
+
 typedef struct _interface
 {
     Timer* timer;

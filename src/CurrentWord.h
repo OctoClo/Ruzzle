@@ -10,6 +10,8 @@
 #include "Texture.h"
 #include "GameManager.h"
 
+typedef struct _word Word;
+
 typedef struct _currentWord
 {
     Texture* texture;

@@ -24,7 +24,7 @@ typedef struct _letter
     int selected;
 } Letter;
 
-Letter* createLetter(char, int, int, Modifier);
+Letter* createLetter(char, int, int, int, int, Modifier);
 
 int scoreLetter(Letter*);
 void setSelectedLetter(Letter*, int);

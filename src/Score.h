@@ -9,6 +9,8 @@
 #include "Word.h"
 #include "Texture.h"
 
+typedef struct _word Word;
+
 typedef struct _score
 {
     Texture* texture;

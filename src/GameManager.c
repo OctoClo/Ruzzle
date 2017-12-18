@@ -31,14 +31,14 @@ void initGameManager(void)
     if (!gameManager->renderer)
         fatalError("Error during render creation", "SDL");
 
-    gameManager->interfaceR = createInterface(gameManager);
+    gameManager->interfaceR = createInterface();
     gameManager->wordsCount = 0;
     gameManager->words = NULL;
-    
-    
+
+
 
     FILE* dico = NULL;
-    char word[TAILLE_MAX];
+    char word[MAX_NB_WORDS];
 
     //Ouverture du fichier dico
     dico = fopen("src/file/dico.txt", "r");
@@ -52,7 +52,7 @@ void initGameManager(void)
 
 
         //Enregistrement des mots du dictionnaire dans l'arbre pr�fix�e
-        while(fgets(word, TAILLE_MAX, dico) != NULL){
+        while(fgets(word, MAX_NB_WORDS, dico) != NULL){
             strtok(word, "\n");
             insertNode(root, word);
         }
@@ -61,7 +61,7 @@ void initGameManager(void)
         SDL_Log("Dico charger");
         fclose(dico);
     }
-    
+
     TrieNode* wordInGrid = initNode();
     wordInGrid = possibleWordInGrid(root);
     SDL_Log("Mot de la grille charger");
