@@ -11,7 +11,7 @@ CurrentWord* createCurrentWord(void)
         fatalError("Error during font loading - CurrentWord", "TTF");
 
     currentWord->x = (WINDOW_WIDTH / 2);
-    currentWord->y = 110;
+    currentWord->y = 90;
 
     currentWord->word = initWord();
 
@@ -21,12 +21,10 @@ CurrentWord* createCurrentWord(void)
 void addLetter(CurrentWord* currentWord, Letter* letter)
 {
     addLetterInWord(currentWord->word, letter);
-    displayWord(currentWord->word);
 }
 
 void finishWord(CurrentWord* currentWord)
 {
-    gameManager->wordsCount++;
     currentWord->word = initWord();
 }
 

@@ -16,7 +16,6 @@ typedef struct _timer
 {
     Texture* texture;
     TTF_Font* font;
-    SDL_Color color;
     int x, y;
     char text[20];
 

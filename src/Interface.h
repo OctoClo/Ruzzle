@@ -1,19 +1,25 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
-#define TAILLE_MAX 100
 
 #include <SDL2/SDL.h>
 
 #include "Grid.h"
 #include "Timer.h"
 #include "CurrentWord.h"
+#include "Score.h"
+#include "Button.h"
 #include "Letter.h"
 
 typedef struct _interface
 {
-    Grid* grid;
     Timer* timer;
+    Score* score;
+
     CurrentWord* currentWord;
+    Grid* grid;
+
+    Button* buttonEnd;
+    Button* buttonQuit;
 } Interface;
 
 Interface* createInterface(void);

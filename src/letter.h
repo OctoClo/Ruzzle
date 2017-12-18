@@ -13,20 +13,22 @@
 
 typedef struct _letter
 {
+    Texture* tile;
+    Texture* bonus;
+    Texture* selectedTile;
+    int x, y, row, column;
+
     char character;
     int weight;
     Modifier modif;
-    Texture* tile;
-    Texture* bonus;
     int selected;
-    Texture* selectedTile;
-    int x, y, row, column;
 } Letter;
 
-Letter* createLetter(char, int, int, int, int, Modifier);
+Letter* createLetter(char, int, int, Modifier);
 
 int scoreLetter(Letter*);
 void setSelectedLetter(Letter*, int);
+
 void renderLetter(Letter*, SDL_Renderer*);
 
 void freeLetter(Letter*);

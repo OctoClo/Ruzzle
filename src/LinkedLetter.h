@@ -8,6 +8,8 @@
 
 #include "Letter.h"
 
+typedef struct _letter Letter;
+
 typedef struct _linkedLetter
 {
     Letter* lett;

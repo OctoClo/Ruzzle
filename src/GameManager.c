@@ -1,22 +1,26 @@
 #include "GameManager.h"
 
-#include "Dictionnary.h"
+void initSDL(void)
+{
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+        fatalError("Error during SDL initialization", "SDL");
+    if (TTF_Init() != 0)
+		fatalError("Error during SDL_ttf initialization", "TTF");
 
+	int imageFlags = IMG_INIT_JPG | IMG_INIT_PNG;
+	int imageBitmask = IMG_Init(imageFlags);
+	if ((imageBitmask & imageFlags) != imageFlags)
+		fatalError("Error during SDL_image initialization", "IMG");
+}
 
 void initGameManager(void)
 {
-    // Declare which function to call on program exit
-    atexit(cleanExit);
-
     gameManager = malloc(sizeof(GameManager));
 
     // Initialize struct values
     gameManager->window = malloc(sizeof(gameManager->window));
     gameManager->renderer = malloc(sizeof(gameManager->renderer));
     gameManager->step = GAME;
-
-    // Initialize all libraries
-    initSDL();
 
     // Create game window and renderer
     gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
@@ -27,6 +31,11 @@ void initGameManager(void)
     if (!gameManager->renderer)
         fatalError("Error during render creation", "SDL");
 
+    gameManager->interfaceR = createInterface(gameManager);
+    gameManager->wordsCount = 0;
+    gameManager->words = NULL;
+    
+    
 
     FILE* dico = NULL;
     char word[TAILLE_MAX];
@@ -34,7 +43,7 @@ void initGameManager(void)
     //Ouverture du fichier dico
     dico = fopen("src/file/dico.txt", "r");
 
-    //Déclaration de l'arbre préfixé
+    //Dï¿½claration de l'arbre prï¿½fixï¿½
     TrieNode* root = initNode();
 
 
@@ -42,7 +51,7 @@ void initGameManager(void)
     if(dico != NULL){
 
 
-        //Enregistrement des mots du dictionnaire dans l'arbre préfixée
+        //Enregistrement des mots du dictionnaire dans l'arbre prï¿½fixï¿½e
         while(fgets(word, TAILLE_MAX, dico) != NULL){
             strtok(word, "\n");
             insertNode(root, word);
@@ -52,13 +61,7 @@ void initGameManager(void)
         SDL_Log("Dico charger");
         fclose(dico);
     }
-
-
-
-
-
-
-    gameManager->interfaceR = createInterface();
+    
     TrieNode* wordInGrid = initNode();
     wordInGrid = possibleWordInGrid(root);
     SDL_Log("Mot de la grille charger");
@@ -67,22 +70,6 @@ void initGameManager(void)
     }else{
         SDL_Log("truc pas present dans la grille !");
     }
-
-
-}
-
-void initSDL(void)
-{
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
-        fatalError("Error during SDL initialization", "SDL");
-
-    if (TTF_Init() != 0)
-		fatalError("Error during SDL_ttf initialization", "TTF");
-
-	int imageFlags = IMG_INIT_JPG | IMG_INIT_PNG;
-	int imageBitmask = IMG_Init(imageFlags);
-	if ((imageBitmask & imageFlags) != imageFlags)
-		fatalError("Error during SDL_image initialization", "IMG");
 }
 
 void gameLoop(void)
@@ -92,11 +79,27 @@ void gameLoop(void)
     // Game loop : handle every event, update and render game
     while (gameManager->step != QUIT)
     {
+        if (gameManager->step == REPLAY)
+        {
+            freeGameManager();
+            initGameManager();
+        }
+
         while (SDL_PollEvent(&event))
             handleEvents(&event);
         update();
         render();
     }
+}
+
+void addWord(Word* word)
+{
+    gameManager->wordsCount++;
+    Word** newWords = realloc(gameManager->words, (gameManager->wordsCount * sizeof(Word*)));
+    newWords[gameManager->wordsCount - 1] = malloc(sizeof(Word));
+    if (newWords != NULL)
+        gameManager->words = newWords;
+    gameManager->words[gameManager->wordsCount - 1] = word;
 }
 
 void handleEvents(SDL_Event* e)
@@ -146,17 +149,26 @@ void freeGameManager(void)
 {
     freeInterface(gameManager->interfaceR);
 
+    int i;
+    for (i = 0 ; i < gameManager->wordsCount ; i++)
+    {
+        //freeWord(gameManager->words[i]);
+        free(gameManager->words[i]); // TODO inside of freeWord()
+    }
+    free(gameManager->words);
+    gameManager->words = NULL;
+
     // Destroy renderer and window if created
     if (gameManager->renderer != NULL)
-    {
         SDL_DestroyRenderer(gameManager->renderer);
-        free(gameManager->renderer);
-    }
+    gameManager->renderer = NULL;
+
     if (gameManager->window != NULL)
-    {
         SDL_DestroyWindow(gameManager->window);
-        free(gameManager->window);
-    }
+    gameManager->window = NULL;
+
+    free(gameManager);
+    gameManager = NULL;
 }
 
 void fatalError(const char* error, const char* library)
@@ -171,7 +183,7 @@ void fatalError(const char* error, const char* library)
     else if (strcmp(library, "TTF") == 0)
         SDL_Log(TTF_GetError());
     else if (strcmp(library, "IMG") == 0)
-        SDL_Log(TTF_GetError());
+        SDL_Log(IMG_GetError());
 
     freeGameManager();
     exit(EXIT_FAILURE);
