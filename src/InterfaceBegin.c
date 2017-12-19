@@ -8,16 +8,16 @@ InterfaceBegin* createInterfaceBegin(void)
     if (createImageTexture(interfaceBegin->imgLogo, "./resources/assets/logo/logoImg.png", gameManager->renderer) == SDL_FALSE)
         fatalError("Error during image logo's texture creation", "IMG");
     interfaceBegin->xImgLogo = 200;
-    interfaceBegin->yImgLogo = 30;
+    interfaceBegin->yImgLogo = 90;
 
     interfaceBegin->textLogo = malloc(sizeof(Texture));
     if (createImageTexture(interfaceBegin->textLogo, "./resources/assets/logo/logoText.png", gameManager->renderer) == SDL_FALSE)
         fatalError("Error during text logo's texture creation", "IMG");
     interfaceBegin->xTextLogo = 0;
-    interfaceBegin->yTextLogo = 162;
+    interfaceBegin->yTextLogo = 230;
 
-    interfaceBegin->buttonPlay = createButton("./resources/assets/buttons/begin/button_play.png", 100, 300);
-    interfaceBegin->buttonQuit = createButton("./resources/assets/buttons/begin/button_quit.png", 100, 500);
+    interfaceBegin->buttonPlay = createButton("./resources/assets/buttons/begin/button_play.png", 50, 400);
+    interfaceBegin->buttonQuit = createButton("./resources/assets/buttons/begin/button_quit.png", 50, 550);
 
     return interfaceBegin;
 }
