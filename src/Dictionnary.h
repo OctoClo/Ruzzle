@@ -28,5 +28,6 @@ bool isValidLetterDictionary(TrieNode*, Word*, Letter*);
 
 TrieNode* possibleWordInGrid(TrieNode*);
 void checkWordInGrid(TrieNode*, TrieNode*, Word*);
+void freeDictionnary(TrieNode*);
 
 #endif // DICTIONNARY_H_INCLUDED

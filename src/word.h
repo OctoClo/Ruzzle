@@ -31,4 +31,6 @@ void unSelectWord(Word*);
 char* getWord(Word*);
 Letter* getLetter(Word*, int);
 
+void freeWord(Word*);
+
 #endif // WORD_H_INCLUDED

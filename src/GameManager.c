@@ -11,6 +11,8 @@ void initSDL(void)
 	int imageBitmask = IMG_Init(imageFlags);
 	if ((imageBitmask & imageFlags) != imageFlags)
 		fatalError("Error during SDL_image initialization", "IMG");
+
+
 }
 
 void readRootDictionary(void)

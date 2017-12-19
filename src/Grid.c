@@ -63,6 +63,28 @@ void unselectAllLetters(Grid* grid)
     }
 }
 
+void generateGrid(int size){
+    FILE* gridFile = NULL;
+
+    gridFile = fopen("src/file/grid.txt", "w");
+    srand(time(NULL));
+    if(gridFile != NULL){
+        int row, column;
+        fprintf(gridFile, "%d\n", size);
+        for(row=0; row<size; row++){
+            for(column=0; column<size; column++){
+                fprintf(gridFile, "[%c,%d]", randLetter(), randModifier());
+            }
+            fprintf(gridFile, "|\n");
+        }
+
+        fclose(gridFile);
+    }else{
+        SDL_Log("Error file");
+    }
+
+}
+
 void renderGrid(Grid* grid, SDL_Renderer* renderer)
 {
     int row, column;

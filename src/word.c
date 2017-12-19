@@ -109,3 +109,8 @@ Letter* getLetter(Word* w, int rank)
     else
         fatalError("Trying to access invalid rank letter in word !", "");
 }
+
+void freeWord(Word* w){
+    freeListe(w->word);
+    free(w);
+}

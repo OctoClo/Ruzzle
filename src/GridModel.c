@@ -1,4 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "GridModel.h"
+
 
 GridModel createGridModel()
 {
@@ -14,3 +18,6 @@ GridModel createGridModel()
 
     return grid;
 }
+
+
+
