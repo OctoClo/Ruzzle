@@ -63,10 +63,14 @@ int scoreWord(Word* w)
         }
         score += scoreLetter(currentLetter);
     }
+
     if (doubleWord > 0)
-        score = score * (doubleWord * 2);
+        score *= (doubleWord * 2);
     if (tripleWord > 0)
-        score = score * (tripleWord * 3);
+        score *= (tripleWord * 3);
+
+    if (word_size > 4)
+        score += (word_size - 4) * 5;
 
     return score;
 }
