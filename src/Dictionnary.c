@@ -56,7 +56,7 @@ bool searchNode(TrieNode* root, const char* word)
     return (currentNode != NULL && currentNode->endOfWord);
 }
 
-bool checkIfLetterIsPossible(TrieNode* root, Word* word, Letter* letter)
+bool isValidLetterDictionary(TrieNode* root, Word* word, Letter* letter)
 {
     int length = strlen(getWord(word));
     int indexWord;
@@ -80,7 +80,7 @@ bool checkIfLetterIsPossible(TrieNode* root, Word* word, Letter* letter)
 
 TrieNode* possibleWordInGrid(TrieNode* root)
 {
-    Grid* currentGrid = gameManager->interfaceR->grid;
+    Grid* currentGrid = gameManager->interfaceGame->grid;
     TrieNode* rootNew = initNode();
     Word* newWord = initWord();
 
@@ -106,182 +106,181 @@ void checkWordInGrid(TrieNode* root, TrieNode* rootNew, Word* word)
 {
     Letter* lastLetter = getLetter(word, sizeWord(word));
     lastLetter->selected = 1;
-    Grid* currentGrid = gameManager->interfaceR->grid;
+    Grid* currentGrid = gameManager->interfaceGame->grid;
     char* wordLisible = getWord(word);
 
     if (searchNode(root, wordLisible))
     {
         insertNode(rootNew, getWord(word));
-        SDL_Log("%s", wordLisible);
     }
 
     if(lastLetter->row<1 && lastLetter->column<1){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
     }else if(lastLetter->row<1 && (lastLetter->column>0 && lastLetter->column<(GRID_SIZE-1))){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
     }else if(lastLetter->row<1 && lastLetter->column==(GRID_SIZE-1)){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
     }else if((lastLetter->row>0 && lastLetter->row<(GRID_SIZE-1)) && lastLetter->column<1){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
     }else if(lastLetter->row==(GRID_SIZE-1) && lastLetter->column<1){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
 
     }else if((lastLetter->row>0 && lastLetter->row<(GRID_SIZE-1)) && (lastLetter->column>0 && lastLetter->column<(GRID_SIZE-1))){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
     }else if(lastLetter->row==(GRID_SIZE-1) && lastLetter->column==(GRID_SIZE-1)){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
     }else if(lastLetter->row==(GRID_SIZE-1) && lastLetter->column>0){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column+1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column+1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
     }else if(lastLetter->row>0 && lastLetter->column==(GRID_SIZE-1)){
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row+1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column-1][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }
-        if(checkIfLetterIsPossible(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
+        if(isValidLetterDictionary(root, word, currentGrid->grid[lastLetter->column][lastLetter->row-1])){
             addLetterInWord(word, currentGrid->grid[lastLetter->column][lastLetter->row-1]);
             checkWordInGrid(root, rootNew, word);
         }

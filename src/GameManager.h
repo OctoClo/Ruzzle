@@ -16,7 +16,9 @@
 #include "Word.h"
 
 typedef struct _trieNode TrieNode;
-typedef struct _interface Interface;
+typedef struct _interfaceBegin InterfaceBegin;
+typedef struct _interfaceGame InterfaceGame;
+typedef struct _interfaceEnd InterfaceEnd;
 typedef struct _word Word;
 
 typedef struct _gameManager
@@ -24,12 +26,17 @@ typedef struct _gameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     Step step;
+    int hasPlayed;
 
     TrieNode* dictionary;
 
-    Interface* interfaceR;
+    InterfaceBegin* interfaceBegin;
+    InterfaceGame* interfaceGame;
+    InterfaceEnd* interfaceEnd;
+
     Word** words;
     int wordsCount;
+    int score;
 } GameManager;
 
 GameManager* gameManager;
@@ -40,7 +47,10 @@ void readRootDictionary(void);
 void initGameManager(void);
 void gameLoop(void);
 
+void setStep(Step);
+
 void addWord(Word*);
+int isWordAlreadyFound(Word*);
 
 void handleEvents(SDL_Event*);
 void update(void);

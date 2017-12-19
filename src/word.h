@@ -14,10 +14,12 @@ typedef struct _liste Liste;
 typedef struct _word
 {
     Liste* word;
+    int score;
 } Word;
 
 Word* initWord(void);
 
+void setScore(Word*, int);
 void addLetterInWord(Word*, Letter*);
 void displayWord(Word*);
 int scoreWord(Word*);

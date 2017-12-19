@@ -10,7 +10,7 @@
 #include "GridModel.h"
 #include "Word.h"
 #include "Letter.h"
-#include "Interface.h"
+#include "InterfaceGame.h"
 
 typedef struct _trieNode
 {
@@ -24,7 +24,7 @@ TrieNode* initNode(void);
 void insertNode(TrieNode*, const char*);
 bool searchNode(TrieNode*, const char*);
 
-bool checkIfLetterIsPossible(TrieNode*, Word*, Letter*);
+bool isValidLetterDictionary(TrieNode*, Word*, Letter*);
 
 TrieNode* possibleWordInGrid(TrieNode*);
 void checkWordInGrid(TrieNode*, TrieNode*, Word*);

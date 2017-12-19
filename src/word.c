@@ -7,6 +7,11 @@ Word* initWord(void)
     return w;
 }
 
+void setScore(Word* word, int score)
+{
+    word->score = score;
+}
+
 void addLetterInWord(Word* w, Letter* l)
 {
     listeInsertionEnd(w->word, l);
@@ -63,10 +68,14 @@ int scoreWord(Word* w)
         }
         score += scoreLetter(currentLetter);
     }
+
     if (doubleWord > 0)
-        score = score * (doubleWord * 2);
+        score *= (doubleWord * 2);
     if (tripleWord > 0)
-        score = score * (tripleWord * 3);
+        score *= (tripleWord * 3);
+
+    if (word_size > 4)
+        score += (word_size - 4) * 5;
 
     return score;
 }
@@ -82,21 +91,19 @@ int isEmptyWord(Word* w)
     return ((getLetter(w, 1) == NULL) ? 1 : 0);
 }
 
-void unSelectWord(Word* w){
+void unSelectWord(Word* w)
+{
     int i;
     Letter* toUnselect;
-    for(i=1;i<=sizeWord(w);i++){
+    for(i = 1 ; i <= sizeWord(w) ; i++)
+    {
         toUnselect = getLetter(w, i);
         toUnselect->selected=0;
-        if(toUnselect->selected){
-            SDL_Log("PB k");
-        }
     }
 }
 
 Letter* getLetter(Word* w, int rank)
 {
-
     if (rank <= sizeWord(w) && rank > 0)
         return getLetterAtRank(w->word, rank);
     else
