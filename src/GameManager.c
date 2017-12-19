@@ -53,9 +53,11 @@ void initGameManager(void)
 
     gameManager->interfaceBegin = createInterfaceBegin();
     gameManager->interfaceGame = createInterfaceGame();
+    gameManager->interfaceEnd = createInterfaceEnd();
 
     gameManager->wordsCount = 0;
     gameManager->words = NULL;
+    gameManager->score = 0;
 
     gameManager->dictionary = initNode();
     gameManager->dictionary = possibleWordInGrid(rootDictionary);
@@ -128,6 +130,8 @@ void handleEvents(SDL_Event* e)
             handleClickInterfaceBegin(gameManager->interfaceBegin, e);
         else if (gameManager->step == GAME)
             handleClickInterfaceGame(gameManager->interfaceGame, e);
+        else if (gameManager->step == END)
+            handleClickInterfaceEnd(gameManager->interfaceEnd, e);
     }
 }
 
@@ -136,6 +140,8 @@ void update(void)
     // Update things
     if (gameManager->step == GAME)
         updateInterfaceGame(gameManager->interfaceGame);
+    else if (gameManager->step == END)
+        updateInterfaceEnd(gameManager->interfaceEnd);
 }
 
 void render(void)
@@ -149,6 +155,8 @@ void render(void)
         renderInterfaceBegin(gameManager->interfaceBegin, gameManager->renderer);
     else if (gameManager->step == GAME)
         renderInterfaceGame(gameManager->interfaceGame, gameManager->renderer);
+    else if (gameManager->step == END)
+        renderInterfaceEnd(gameManager->interfaceEnd, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
 }
@@ -165,6 +173,7 @@ void cleanExit(void)
 
 void freeGameManager(void)
 {
+    freeInterfaceEnd(gameManager->interfaceEnd);
     freeInterfaceGame(gameManager->interfaceGame);
     freeInterfaceBegin(gameManager->interfaceBegin);
 

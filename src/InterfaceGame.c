@@ -54,6 +54,7 @@ void handleFinishWord(InterfaceGame* interfaceGame)
     {
         addWord(interfaceGame->currentWord->word);
         addWordToScore(interfaceGame->score, interfaceGame->currentWord->word);
+        setScore(interfaceGame->currentWord->word, scoreWord(interfaceGame->currentWord->word));
     }
     finishWord(interfaceGame->currentWord);
     unselectAllLetters(interfaceGame->grid);

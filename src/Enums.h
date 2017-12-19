@@ -3,7 +3,7 @@
 
 typedef enum _step
 {
-    BEGIN, GAME, REPLAY, QUIT
+    BEGIN, GAME, END, REPLAY, QUIT
 } Step;
 
 typedef enum _modifier

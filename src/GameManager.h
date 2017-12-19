@@ -16,8 +16,9 @@
 #include "Word.h"
 
 typedef struct _trieNode TrieNode;
-typedef struct _interfaceGame InterfaceGame;
 typedef struct _interfaceBegin InterfaceBegin;
+typedef struct _interfaceGame InterfaceGame;
+typedef struct _interfaceEnd InterfaceEnd;
 typedef struct _word Word;
 
 typedef struct _gameManager
@@ -31,9 +32,11 @@ typedef struct _gameManager
 
     InterfaceBegin* interfaceBegin;
     InterfaceGame* interfaceGame;
+    InterfaceEnd* interfaceEnd;
 
     Word** words;
     int wordsCount;
+    int score;
 } GameManager;
 
 GameManager* gameManager;

@@ -7,6 +7,11 @@ Word* initWord(void)
     return w;
 }
 
+void setScore(Word* word, int score)
+{
+    word->score = score;
+}
+
 void addLetterInWord(Word* w, Letter* l)
 {
     listeInsertionEnd(w->word, l);
