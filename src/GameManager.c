@@ -81,10 +81,8 @@ void gameLoop(void)
 void addWord(Word* word)
 {
     gameManager->wordsCount++;
-    Word** newWords = realloc(gameManager->words, (gameManager->wordsCount * sizeof(Word*)));
-    newWords[gameManager->wordsCount - 1] = malloc(sizeof(Word));
-    if (newWords != NULL)
-        gameManager->words = newWords;
+    gameManager->words = realloc(gameManager->words, (gameManager->wordsCount * sizeof(Word*)));
+    gameManager->words[gameManager->wordsCount - 1] = malloc(sizeof(Word));
     gameManager->words[gameManager->wordsCount - 1] = word;
 }
 
