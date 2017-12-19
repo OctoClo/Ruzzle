@@ -41,7 +41,8 @@ void renderScore(Score* score, SDL_Renderer* renderer)
 
 void freeScore(Score* score)
 {
-    freeTexture(score->texture);
+    if (gameManager->hasPlayed == 1)
+        freeTexture(score->texture);
 
     TTF_CloseFont(score->font);
     score->font = NULL;

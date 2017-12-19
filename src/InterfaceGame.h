@@ -1,5 +1,5 @@
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#ifndef INTERFACE_GAME_H
+#define INTERFACE_GAME_H
 
 #include <SDL2/SDL.h>
 
@@ -31,7 +31,7 @@ typedef struct _interfaceGame
 
 InterfaceGame* createInterfaceGame(void);
 
-void handleClick(InterfaceGame*, SDL_Event*);
+void handleClickInterfaceGame(InterfaceGame*, SDL_Event*);
 void handleAddLetter(InterfaceGame*, Letter*);
 int isValidLetter(InterfaceGame*, Letter*);
 void handleFinishWord(InterfaceGame*);
@@ -42,4 +42,4 @@ void renderInterfaceGame(InterfaceGame*, SDL_Renderer*);
 
 void freeInterfaceGame(InterfaceGame*);
 
-#endif // INTERFACE_H
+#endif // INTERFACE_GAME_H

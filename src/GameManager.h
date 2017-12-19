@@ -17,6 +17,7 @@
 
 typedef struct _trieNode TrieNode;
 typedef struct _interfaceGame InterfaceGame;
+typedef struct _interfaceBegin InterfaceBegin;
 typedef struct _word Word;
 
 typedef struct _gameManager
@@ -24,10 +25,13 @@ typedef struct _gameManager
     SDL_Window* window;
     SDL_Renderer* renderer;
     Step step;
+    int hasPlayed;
 
     TrieNode* dictionary;
 
+    InterfaceBegin* interfaceBegin;
     InterfaceGame* interfaceGame;
+
     Word** words;
     int wordsCount;
 } GameManager;

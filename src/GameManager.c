@@ -39,7 +39,8 @@ void initGameManager(void)
     gameManager = malloc(sizeof(GameManager));
 
     // Initialize struct values
-    gameManager->step = GAME;
+    gameManager->step = BEGIN;
+    gameManager->hasPlayed = 0;
 
     // Create game window and renderer
     gameManager->window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
@@ -50,7 +51,9 @@ void initGameManager(void)
     if (!gameManager->renderer)
         fatalError("Error during render creation", "SDL");
 
+    gameManager->interfaceBegin = createInterfaceBegin();
     gameManager->interfaceGame = createInterfaceGame();
+
     gameManager->wordsCount = 0;
     gameManager->words = NULL;
 
@@ -111,13 +114,19 @@ void handleEvents(SDL_Event* e)
 
     // Handle mouse inputs
     else if (e->type == SDL_MOUSEBUTTONDOWN)
-        handleClick(gameManager->interfaceGame, e);
+    {
+        if (gameManager->step == BEGIN)
+            handleClickInterfaceBegin(gameManager->interfaceBegin, e);
+        else if (gameManager->step == GAME)
+            handleClickInterfaceGame(gameManager->interfaceGame, e);
+    }
 }
 
 void update(void)
 {
     // Update things
-    updateInterfaceGame(gameManager->interfaceGame);
+    if (gameManager->step == GAME)
+        updateInterfaceGame(gameManager->interfaceGame);
 }
 
 void render(void)
@@ -127,7 +136,10 @@ void render(void)
     SDL_RenderClear(gameManager->renderer);
 
     // Render things
-    renderInterfaceGame(gameManager->interfaceGame, gameManager->renderer);
+    if (gameManager->step == BEGIN)
+        renderInterfaceBegin(gameManager->interfaceBegin, gameManager->renderer);
+    else if (gameManager->step == GAME)
+        renderInterfaceGame(gameManager->interfaceGame, gameManager->renderer);
 
     SDL_RenderPresent(gameManager->renderer);
 }
@@ -145,6 +157,7 @@ void cleanExit(void)
 void freeGameManager(void)
 {
     freeInterfaceGame(gameManager->interfaceGame);
+    freeInterfaceBegin(gameManager->interfaceBegin);
 
     int i;
     for (i = 0 ; i < gameManager->wordsCount ; i++)

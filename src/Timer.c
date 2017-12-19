@@ -76,7 +76,8 @@ void renderTimer(Timer* timer, SDL_Renderer* renderer)
 
 void freeTimer(Timer* timer)
 {
-    freeTexture(timer->texture);
+    if (gameManager->hasPlayed == 1)
+        freeTexture(timer->texture);
 
     TTF_CloseFont(timer->font);
     timer->font = NULL;

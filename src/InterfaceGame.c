@@ -10,13 +10,13 @@ InterfaceGame* createInterfaceGame(void)
     interfaceGame->currentWord = createCurrentWord();
     interfaceGame->grid = createGrid();
 
-    interfaceGame->buttonEnd = createButton("./resources/assets/buttons/button_end.png", 75, 600);
-    interfaceGame->buttonQuit = createButton("./resources/assets/buttons/button_quit.png", 275, 600);
+    interfaceGame->buttonEnd = createButton("./resources/assets/buttons/game/button_end.png", 75, 600);
+    interfaceGame->buttonQuit = createButton("./resources/assets/buttons/game/button_quit.png", 275, 600);
 
     return interfaceGame;
 }
 
-void handleClick(InterfaceGame* interfaceGame, SDL_Event* e)
+void handleClickInterfaceGame(InterfaceGame* interfaceGame, SDL_Event* e)
 {
     if (e->button.button == SDL_BUTTON_LEFT)
     {
