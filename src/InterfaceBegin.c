@@ -27,12 +27,9 @@ void handleClickInterfaceBegin(InterfaceBegin* interfaceBegin, SDL_Event* e)
     if (e->button.button == SDL_BUTTON_LEFT)
     {
         if (isClickedButton(interfaceBegin->buttonPlay, e->button.x, e->button.y) == 1)
-        {
-            gameManager->step = GAME;
-            gameManager->hasPlayed = 1;
-        }
+            setStep(GAME);
         else if (isClickedButton(interfaceBegin->buttonQuit, e->button.x, e->button.y) == 1)
-            gameManager->step = QUIT;
+            setStep(QUIT);
     }
 }
 

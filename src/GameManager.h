@@ -44,6 +44,8 @@ void readRootDictionary(void);
 void initGameManager(void);
 void gameLoop(void);
 
+void setStep(Step);
+
 void addWord(Word*);
 int isWordAlreadyFound(Word*);
 

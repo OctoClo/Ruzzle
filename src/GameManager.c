@@ -39,7 +39,7 @@ void initGameManager(void)
     gameManager = malloc(sizeof(GameManager));
 
     // Initialize struct values
-    gameManager->step = BEGIN;
+    setStep(BEGIN);
     gameManager->hasPlayed = 0;
 
     // Create game window and renderer
@@ -81,6 +81,15 @@ void gameLoop(void)
     }
 }
 
+void setStep(Step step)
+{
+    gameManager->step = step;
+    if (step == GAME)
+        gameManager->hasPlayed = 1;
+    else if (step == END)
+        gameManager->score = gameManager->interfaceGame->score->score;
+}
+
 void addWord(Word* word)
 {
     gameManager->wordsCount++;
@@ -108,9 +117,9 @@ void handleEvents(SDL_Event* e)
 {
     // Handle quit event
     if (e->type == SDL_QUIT)
-        gameManager->step = QUIT;
+        setStep(QUIT);
     else if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
-        gameManager->step = QUIT;
+        setStep(QUIT);
 
     // Handle mouse inputs
     else if (e->type == SDL_MOUSEBUTTONDOWN)

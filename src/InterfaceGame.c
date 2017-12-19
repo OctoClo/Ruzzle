@@ -24,9 +24,9 @@ void handleClickInterfaceGame(InterfaceGame* interfaceGame, SDL_Event* e)
         if (letter != NULL)
             handleAddLetter(gameManager->interfaceGame, letter);
         else if (isClickedButton(interfaceGame->buttonEnd, e->button.x, e->button.y) == 1)
-            gameManager->step = REPLAY;
+            setStep(END);
         else if (isClickedButton(interfaceGame->buttonQuit, e->button.x, e->button.y) == 1)
-            gameManager->step = QUIT;
+            setStep(QUIT);
     }
     else if (e->button.button == SDL_BUTTON_RIGHT)
         handleFinishWord(gameManager->interfaceGame);

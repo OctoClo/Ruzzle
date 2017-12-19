@@ -26,7 +26,7 @@ void updateTimer(Timer* timer)
     if (timer->time > 120)
     {
         strcat(timer->text, "0:00");
-        gameManager->step = QUIT;
+        setStep(END);
     }
     else
     {
