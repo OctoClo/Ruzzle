@@ -13,7 +13,7 @@ CurrentWord* createCurrentWord(void)
     currentWord->x = (WINDOW_WIDTH / 2);
     currentWord->y = 90;
 
-    currentWord->word = initWord();
+    currentWord->word = createWord();
 
     return currentWord;
 }
@@ -25,7 +25,7 @@ void addLetter(CurrentWord* currentWord, Letter* letter)
 
 void finishWord(CurrentWord* currentWord)
 {
-    currentWord->word = initWord();
+    currentWord->word = createWord();
 }
 
 void updateCurrentWord(CurrentWord* currentWord)

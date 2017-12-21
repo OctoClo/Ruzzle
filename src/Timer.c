@@ -60,7 +60,7 @@ void updateTimer(Timer* timer)
     }
 
     timer->currentTime = SDL_GetTicks();
-    timer->time = (timer->currentTime / 1000) - (timer->startTime / 1000);
+    timer->time = (timer->currentTime - timer->startTime) / 1000;
 
     SDL_Color timerColor = { 255, 255, 255 };
     if (createTextTexture(timer->texture, timer->text, &timerColor, timer->font, gameManager->renderer) == SDL_FALSE)

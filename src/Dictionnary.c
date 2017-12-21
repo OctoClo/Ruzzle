@@ -86,7 +86,7 @@ TrieNode* possibleWordInGrid(TrieNode* root)
 {
     Grid* currentGrid = gameManager->interfaceGame->grid;
     TrieNode* rootNew = initNode();
-    Word* newWord = initWord();
+    Word* newWord = createWord();
 
     int row, column;
     for (column = 0 ; column < 4 ;column++)
@@ -98,7 +98,7 @@ TrieNode* possibleWordInGrid(TrieNode* root)
                 addLetterInWord(newWord, currentGrid->grid[row][column]);
                 checkWordInGrid(root, rootNew, newWord);
                 unSelectWord(newWord);
-                newWord = initWord();
+                newWord = createWord();
             }
         }
     }

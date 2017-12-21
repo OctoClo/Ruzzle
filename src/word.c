@@ -1,6 +1,6 @@
 #include "Word.h"
 
-Word* initWord(void)
+Word* createWord(void)
 {
     Word* w = malloc(sizeof(Word));
     w->word = listeInitialisation();

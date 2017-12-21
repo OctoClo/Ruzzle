@@ -17,7 +17,7 @@ typedef struct _word
     int score;
 } Word;
 
-Word* initWord(void);
+Word* createWord(void);
 
 void setScore(Word*, int);
 void addLetterInWord(Word*, Letter*);
