@@ -23,24 +23,19 @@ typedef struct _liste
     LinkedLetter* first;
 } Liste;
 
-Liste* listeInitialisation();
+Liste* listeInitialisation(void);
 
 void listeInsertionBeginning(Liste*, Letter*);
-
 void listeInsertionEnd(Liste*, Letter*);
 
 void deleteFirstOfListe(Liste*);
-
 Liste* deleteLastOfListe(Liste*);
-
 void displayListe(Liste*);
-
-void freeLinkedLetter(LinkedLetter*);
-
 int sizeListe(Liste*);
 
 Letter* getLetterAtRank(Liste*, int);
 void freeListe(Liste*);
 
+void freeLinkedLetter(LinkedLetter*);
 
 #endif // LINKEDLETTER_H_INCLUDED

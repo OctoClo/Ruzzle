@@ -21,13 +21,14 @@ typedef struct _trieNode
 TrieNode* rootDictionary;
 
 TrieNode* initNode(void);
+
 void insertNode(TrieNode*, const char*);
 bool searchNode(TrieNode*, const char*);
 
 bool isValidLetterDictionary(TrieNode*, Word*, Letter*);
-
 TrieNode* possibleWordInGrid(TrieNode*);
 void checkWordInGrid(TrieNode*, TrieNode*, Word*);
-void freeDictionnary(TrieNode*);
+
+void freeDictionary(TrieNode*);
 
 #endif // DICTIONNARY_H_INCLUDED

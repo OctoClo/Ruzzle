@@ -22,6 +22,7 @@
 #define MAX_NB_WORDS 100
 
 int randInter(int, int);
-char randLetter();
+int randModifier(void);
+char randLetter(void);
 
 #endif // UTILS_H

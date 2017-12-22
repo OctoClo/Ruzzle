@@ -78,7 +78,7 @@ bool isValidLetterDictionary(TrieNode* root, Word* word, Letter* letter)
     return (currentNode != NULL && currentNode->children[indexLetter] != NULL && !letter->selected);
 }
 
-void freeDictionnary(TrieNode* root){
+void freeDictionary(TrieNode* root){
     free(root);
 }
 

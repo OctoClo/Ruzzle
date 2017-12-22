@@ -15,6 +15,6 @@ typedef struct _gridModel
     PairGrid grid[GRID_SIZE][GRID_SIZE];
 } GridModel;
 
-GridModel createGridModel();
+GridModel createGridModel(void);
 
 #endif // GRID_MODEL_H

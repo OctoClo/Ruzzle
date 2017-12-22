@@ -1,7 +1,7 @@
 #include "LinkedLetter.h"
 
 
-Liste* listeInitialisation()
+Liste* listeInitialisation(void)
 {
     Liste* liste = malloc(sizeof(*liste));
     LinkedLetter* linkedLetter = malloc(sizeof(*linkedLetter));
@@ -65,12 +65,6 @@ void deleteFirstOfListe(Liste* liste)
         liste->first = liste->first->next;
         free(toDelete);
     }
-}
-
-void freeLinkedLetter(LinkedLetter* linkedLet){
-    linkedLet->next = NULL;
-    linkedLet->lett = NULL;
-    free(linkedLet);
 }
 
 Liste* deleteLastOfListe(Liste* liste)
@@ -139,4 +133,11 @@ Letter* getLetterAtRank(Liste* liste, int rank)
         current = current->next;
 
     return current->lett;
+}
+
+void freeLinkedLetter(LinkedLetter* linkedLet)
+{
+    linkedLet->next = NULL;
+    linkedLet->lett = NULL;
+    free(linkedLet);
 }

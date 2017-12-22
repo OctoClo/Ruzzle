@@ -4,7 +4,7 @@ int randInter(int a, int b){
     return rand()%(a-b)+a;
 }
 
-int randModifier(){
+int randModifier(void){
     int sumOfWeight=0;
     int num_choice=5;
     int choice_weight[num_choice];
@@ -27,7 +27,7 @@ int randModifier(){
     }
 }
 
-char randLetter(){
+char randLetter(void){
     int sumOfWeight=0;
     int num_choice=ALPHABET_SIZE;
     int choice_weight[num_choice];

@@ -4,7 +4,7 @@
 #include "GridModel.h"
 
 
-GridModel createGridModel()
+GridModel createGridModel(void)
 {
     GridModel grid =
     {
