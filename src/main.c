@@ -1,20 +1,25 @@
-#include <SDL2/SDL.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "GameManager.h"
+
 int main(int argc, char** argv)
 {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
-        printf("Error during SDL initialization : %s\n", SDL_GetError());
+    // Declare which function to call on program exit
+    atexit(cleanExit);
 
-    SDL_Window* window = SDL_CreateWindow("Ruzzle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_OPENGL);
-	if (!window)
-		printf("Error during window creation : %s\n", SDL_GetError());
+    // Initialize SDL and read complete dictionnary
+    initSDL();
+    readRootDictionary();
 
-    printf("Hello world!\n");
+    // Launch game loop
+    gameManager = NULL;
+    initGameManager();
+    gameLoop();
 
-    getchar();
+    // Free every pointer
+    freeGameManager();
+    free(gameManager);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

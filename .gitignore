@@ -1,4 +1,6 @@
 bin/
+include/
+lib/
 obj/
 *.cbp
 *.cscope_file_list
