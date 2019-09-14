@@ -1,19 +1,19 @@
 # Ruzzle
 
-## Présentation
+## Presentation
 
-Ceci est un **projet scolaire** réalisé en 3 mois en Licence 3 Informatique par un groupe de **3 personnes**. Les consignes étaient de coder le jeu [Ruzzle](http://ruzzle-game.com/) en **C**, en utilisant la librairie **SDL 2.0**.
+This is a **student project** made in 3 months with a team of 3 students. The instructions were to code a [Ruzzle game](http://ruzzle-game.com/) in **C** using the **SDL 2.0** librairy.
 
-L'objectif du joueur est de faire le plus haut **score** dans le **temps imparti** (2 minutes), en reliant les **lettres** d'une **grille** afin de former des **mots**.
+The goal is to score the highest within the **time limits** (2 minutes), by linking together the letters of the grid to create words.
 
-Dans le dossier **doc**, vous pourrez trouver un **diagramme** récapitulant les diverses entités du jeu, ainsi que le **rapport du projet** qui contient des explications plus précises sur les choix techniques, l'organisation, etc...
+In the **doc** folder, you will find a **diagram** with the various entities of the game, as well as our **report** containing more precise explanations, technical choices, organization, etc (in French).
 
-## Captures d'écran
+## Screenshots
 
-Quelques interfaces du jeu :
+Some of the game's interfaces:
 
 ![Interfaces](img/Interfaces.PNG)
 
-Tous les assets ont été réalisés par nos soins (excepté le logo de Ruzzle).
+Every asset was made by us (except for the Ruzzle logo).
 
-![Assets de la lettre A](img/Assets.PNG)
+![Assets of letter A](img/Assets.PNG)
